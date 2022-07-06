@@ -6,30 +6,28 @@ import Input from '../../components/input/Input';
 import "./Edit.css"
 import { useUserAuth } from '../../context/UserAuthcontext';
 
-
 const Editpage = () => {
     const [userId,setUserId] = useState('');
     const [username,setUsername] = useState('');
     const [email,setEmail] = useState('');
     const [role,setRole] = useState('');
     const [status,setStatus] = useState('');
-    const [lifespan,setLifeSpan] = useState('');
+    const [lifespanFrom,setLifeSpanFrom] = useState('');
+    const [lifespanTo,setLifeSpanTo] = useState('');
      const navigate = useNavigate();
      const { usersId,setUsersid } = useUserAuth();
     
-
-    
-    const editHandler = async () => {
-      
+   const editHandler = async () => {
         try {
-          const docSnap = await UserDataService.getUser(usersId);
+        const docSnap = await UserDataService.getUser(usersId);
           console.log("the record is :", docSnap.data());
           setUserId(docSnap.data().userId);
           setUsername(docSnap.data().username);
           setEmail(docSnap.data().email);
           setRole(docSnap.data().role);
           setStatus(docSnap.data().status);
-          setLifeSpan(docSnap.data().lifespan)
+          setLifeSpanFrom(docSnap.data().lifespanFrom)
+          setLifeSpanTo(docSnap.data().lifespanTo)
         } catch (err) {
             console.log(err);
         }
@@ -48,9 +46,9 @@ const Editpage = () => {
             email,
             status,
             role,
-            lifespan,
+            lifespanFrom,
+            lifespanTo,
             time:new Date().toLocaleString()
-
           };
 
         try {
@@ -104,7 +102,6 @@ const Editpage = () => {
                     <Input
                       type="text"
                       id="username"
-                      // label='Username'
                       value={username}
                       onChange={(e) => {
                         setUsername(e.target.value);
@@ -119,7 +116,6 @@ const Editpage = () => {
                     <Input
                       type="text"
                       id="email"
-                      // label='E-mail'
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
@@ -156,19 +152,19 @@ const Editpage = () => {
                     <Input
                       type="date"
                       className="lifeSpan_time"
-                      value={lifespan}
+                      value={lifespanFrom}
                       onChange={(e) => {
-                        setLifeSpan(e.target.value);
+                        setLifeSpanFrom(e.target.value);
                       }}
                     />
                     <font>to</font>
                     <Input
                       type="date"
-                      // value={lifespan.to}
+                      value={lifespanTo}
                       className="lifeSpan_time"
-                      // onChange={(e) => {
-                      //   setLifeSpan(e.target.value);
-                      // }}
+                      onChange={(e) => {
+                        setLifeSpanTo(e.target.value);
+                      }}
                     />
                     </div>
                   </div>

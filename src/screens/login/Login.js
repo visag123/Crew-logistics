@@ -8,7 +8,6 @@ import logo from "../../images/landscape-view.jpg"
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 
-
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +15,11 @@ const Login = () => {
   const navigate = useNavigate();
   const { logIn,setUserInfo } = useUserAuth();
 
+  const clearMassage = () =>{
+    setTimeout(() => {
+    setMessage({ error: false, msg: "" });
+  }, 3000);}
+  
   const loginhandler =async (e) => {
     e.preventDefault();
     if (username==='visaga' && password ==='123456') {
@@ -41,28 +45,18 @@ const Login = () => {
                navigate("/");
              }
            } else {
-            //  console.log("Account Status Inactive");
              setMessage({ error: true, msg: "Account Status Inactive" });
-           setTimeout(() => {
-             setMessage({ error: false, msg: "" });
-           }, 3000);
+             clearMassage();
            }
          } else {
-          //  console.log("Password Wrong");
            setMessage({ error: true, msg: "Password Wrong" });
-           setTimeout(() => {
-             setMessage({ error: false, msg: "" });
-           }, 3000);
+           clearMassage();
          }
        }
      });
    } catch (err) {
-    console.log('invalid',err);
     setMessage({ error: true, msg:'Username Invalid' });
-    setTimeout(()=>{
-      setMessage({ error: false, msg: "" });
-
-      },3000)
+    clearMassage();
    }
   };
 

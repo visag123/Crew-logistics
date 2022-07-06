@@ -11,12 +11,10 @@ const userAuthContext = createContext();
 export function UserAuthContextProvider({ children }) {
   const [userInfo,setUserInfo] = useState({initial:false,nameId :''})
   const [usersId,setUsersid]=useState('');
-  
   const getUserId=(id)=>{
-    console.log('the userid ',id);
-    setUsersid(id);
+        setUsersid(id);
   }
- 
+
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
@@ -28,7 +26,18 @@ export function UserAuthContextProvider({ children }) {
   }
 
   return (
-    <userAuthContext.Provider value={{ logIn, signUp, logOut,userInfo, setUserInfo,usersId,setUsersid,getUserId}}>
+    <userAuthContext.Provider
+      value={{
+        logIn,
+        signUp,
+        logOut,
+        userInfo,
+        setUserInfo,
+        usersId,
+        setUsersid,
+        getUserId,
+      }}
+    >
       {children}
     </userAuthContext.Provider>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import "./Button.js"
 
 const Button = (props) => {
     const {type,className,onClick} =props

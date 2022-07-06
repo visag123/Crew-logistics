@@ -1,5 +1,4 @@
 import React from 'react';
-import "./Input.css";
 
 const Input = (props) => {
     const{type,id,className,placeholder,label,name,value,onChange,disabled} =props

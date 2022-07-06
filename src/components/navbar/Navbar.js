@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <div className="nav">
       <h2 className="logo">
-        <i class="fa-solid fa-plane-departure"></i>
+        <i className="fa-solid fa-plane-departure"></i>
         &nbsp;&nbsp; CREW <font>Logistics</font>
       </h2>
 

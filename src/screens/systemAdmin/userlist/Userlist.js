@@ -8,13 +8,10 @@ import { Link } from "react-router-dom";
 const Userlist = () => {
   const [users, setUsers] = useState([]);
   const [searchUsers, setSearchUsers] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
-  const [loadResult, setloadResult] = useState([]);
-  const [setrole, setSetrole] = useState([]);
   const [error, setError] = useState(false);
   const searchinput = useRef();
-  const { signUp, getUserId } = useUserAuth();
   const [message, setMessage] = useState({ error: false, msg: "" });
+  const { signUp, getUserId } = useUserAuth();
 
   useEffect(() => {
     getUsers();
@@ -26,48 +23,19 @@ const Userlist = () => {
   };
   const setRolehandler = () => {
     setError(!error);
-    const setRoleUser = loadResult.filter((user) => {
-      return user.role === "NA";
-    });
-    setSetrole(setRoleUser);
-    console.log(setRoleUser);
   };
-  setTimeout(() => {
-    if (setrole !== undefined && error) {
-      setloadResult(setrole);
-    } else {
-      setloadResult(searchUsers.length < 1 ? users : searchResult);
-    }
-  });
 
   const searchHandler = (e) => {
     const searchrf = searchinput.current.value;
-    searchUsersHandler(searchrf);
-  };
-  const searchUsersHandler = (searchUsers) => {
-    setSearchUsers(searchUsers);
-    if (searchUsers !== "") {
-      const newUserlist = users.filter((user) => {
-        return Object.values(user)
-          .join("")
-          .toLowerCase()
-          .includes(searchUsers.toLowerCase());
-      });
-      setSearchResult(newUserlist);
-    } else {
-      setSearchResult(users);
-      console.log(searchResult);
-    }
-  };
+    setSearchUsers(searchrf);
 
-  const acceptuser = async (
-    userId,
-    username,
-    email,
-    password,
-    status,
-    role
-  ) => {
+  };
+  const clearMassage = () =>{
+    setTimeout(() => {
+    setMessage({ error: false, msg: "" });
+  }, 3000);}
+
+  const acceptuser = async (userId, username,email,password,status,role)=> {
     const user = {
       userId,
       username,
@@ -82,26 +50,24 @@ const Userlist = () => {
         await signUp(email, password);
         await UserDataService.addUser(user);
         setMessage({ error: true, msg: "Successfully Uptaded" });
-        setTimeout(() => {
-          setMessage({ error: false, msg: "" });
-        }, 4000);
+        clearMassage()
+
       } else {
         setMessage({ error: true, msg: "User Status was Inactive" });
-        setTimeout(() => {
-          setMessage({ error: false, msg: "" });
-        }, 3000);
+        clearMassage()
       }
     } catch (err) {
       console.log(err);
       setMessage({ error: true, msg: err.message });
-      setTimeout(() => {
-        setMessage({ error: false, msg: "" });
-      }, 3000);
+      clearMassage()
     }
   };
   const rejectuser = async (id) => {
     await UserDataService.deleteUsers(id);
     getUsers();
+    setMessage({ error: true, msg: "Delete Successfully" });
+    clearMassage()
+
   };
   return (
     <>
@@ -150,7 +116,15 @@ const Userlist = () => {
             </tr>
           </thead>
           <tbody>
-            {loadResult.map((doc) => {
+            {users.filter((doc)=>{
+              if (searchUsers === undefined && error === false){
+                 return doc
+              } else if (  error === false && doc.username.toLowerCase().includes(searchUsers.toLocaleLowerCase())){
+                return doc
+              } else if (error === true )
+               return doc.role ==="NA"
+            })
+            .map((doc) => {
               return (
                 <tr key={doc.id}>
                   <td onClick={() => getUserId(doc.id)}>
@@ -171,14 +145,7 @@ const Userlist = () => {
                   <td>
                     <button
                       onClick={(e) => {
-                        acceptuser(
-                          doc.userId,
-                          doc.username,
-                          doc.email,
-                          doc.password,
-                          doc.status,
-                          doc.role
-                        );
+                        acceptuser(doc.userId,doc.username,doc.email,doc.password,doc.status,doc.role);  
                       }}
                     >
                       <i className="fa-solid fa-circle-check"></i>

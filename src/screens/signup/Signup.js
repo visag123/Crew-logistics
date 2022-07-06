@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../images/landscape-view.jpg"
 import Input from "../../components/input/Input";
 
-
 const Signup = () => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState("");
@@ -18,11 +17,13 @@ const Signup = () => {
   const [usererrors,setuserErrors] = useState(false);
   const [emailerrors,setemailErrors] = useState(false);
   const navigate = useNavigate();
-
   const userrep = useRef('');
   const emailrep = useRef()
-  
-  
+
+  const clearMassage = () =>{
+    setTimeout(() => {setMessage({ error: false, msg: "" });
+  }, 3000);}
+
   const usernameChange =async (e)=>{
     setUsername(e.target.value)
     const userref = userrep.current.value
@@ -30,16 +31,13 @@ const Signup = () => {
      data.docs.forEach((doc) => {
     const newdata = doc.data();
     if (newdata.username === userref){
-      //  console.log('username is already exist');
        setuserErrors(true)
        setTimeout(()=>{
         setuserErrors( false);
-  
-        },3000)
-    }
+          },3000)
+          }
      })
 }
-
   const emailChange = async (e)=>{
     setEmail(e.target.value)
     const emailref=emailrep.current.value
@@ -49,17 +47,12 @@ const Signup = () => {
     if (newdata.email === emailref){
       if(newdata.password === undefined){
       setMessage({ error: true, msg: "User Account already created" });
-      setTimeout(()=>{
-        setMessage( false);
-  
-        },3000)
-        console.log('User Account already created ')
-      }else{
+        clearMassage();
+      } else{
         setemailErrors(true)
         setTimeout(()=>{
          setemailErrors( false);
-   
-         },3000)
+           },3000)
       }
     }
      })
@@ -67,14 +60,6 @@ const Signup = () => {
   const formsubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-    if (firstname === "" || username === "" ) {
-      setMessage({ error: true, msg: "All fields are mandatory!" });
-      setTimeout(()=>{
-        setMessage({ error: false, msg: "" });
-  
-        },3000)
-      return;
-    }
     const newUser = {
       userId: Date.now(),
       firstname,
@@ -85,16 +70,13 @@ const Signup = () => {
       status:"NA",
       role:"NA"
     };
-    console.log(newUser);
     try {
       await UserDataService.addUsers(newUser);
-      setMessage({ error: false, msg: "New USER added successfully!" });
+      setMessage({ error: true, msg: "New USER added successfully!" });
+      clearMassage();  
     } catch (err) {
       setMessage({ error: true, msg: err.message });
-      setTimeout(()=>{
-        setMessage({ error: false, msg: "" });
-  
-        },2000)
+      clearMassage();
     }
     navigate("/");
     setFirstname("");
@@ -115,9 +97,6 @@ const Signup = () => {
       <div className="signup">
         <form className="row g-3" onSubmit={formsubmit}>
           <div className="col-md-6">
-            {/* <label htmlFor="firstname" className="form-label">
-              First name
-            </label> */}
             <Input
               type="text"
               className="form-control"
@@ -129,9 +108,6 @@ const Signup = () => {
             />
           </div>
           <div className="col-md-6">
-            {/* <label htmlFor="inputLname" className="form-label">
-              Last name
-            </label> */}
             <Input
               type="text"
               className="form-control"
@@ -153,7 +129,6 @@ const Signup = () => {
               ref={userrep}
               autoComplete="off"
               value={username}
-            
               onChange={usernameChange}
             />
             <small>{usererrors ? "Username already exist" : ""}</small>
@@ -174,9 +149,6 @@ const Signup = () => {
             <small>{emailerrors ? "Email already exist" : ""}</small>
           </div>
           <div className="col-12">
-            {/* <label htmlFor="Password" className="form-label">
-              Password
-            </label> */}
             <Input
               type="password"
               className="form-control"
@@ -187,19 +159,15 @@ const Signup = () => {
             />
           </div>
           <div className="col-12">
-            {/* <label htmlFor="cPassword" className="form-label">
-              Conform Password
-            </label> */}
             <Input
               type="password"
               className="form-control"
-              id="cPassword"
+              id="confirmPassword"
               label='Confirm Password'
               value={confirmpassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-
           <div className="col-12">
             <button type="submit" className="btn btn-primary">
               Create an account
@@ -213,5 +181,4 @@ const Signup = () => {
     </div>
   );
 };
-
 export default Signup;

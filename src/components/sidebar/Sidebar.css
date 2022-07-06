@@ -35,9 +35,7 @@
 
 }
 .sidebar ul li:hover{
-    /* background: rgb(182, 238, 233); */
     background-color: rgb(196, 211, 242);
-
     border-radius: 10px;
     margin-left: 10px;
     color: black;

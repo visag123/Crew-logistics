@@ -1,9 +1,7 @@
 import React  from "react";
 import "./Sys.css"
-
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
-// import Userlist from "./maincontent/Userlist";
 import { Outlet } from "react-router-dom";
 
 const SysAdminpage = () => {

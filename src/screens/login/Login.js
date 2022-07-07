@@ -15,11 +15,13 @@ const Login = () => {
   const navigate = useNavigate();
   const { logIn,setUserInfo } = useUserAuth();
 
+  /// Clear notification messages /// 
   const clearMassage = () =>{
     setTimeout(() => {
     setMessage({ error: false, msg: "" });
   }, 3000);}
-  
+
+  /// Login form Submit ///
   const loginhandler =async (e) => {
     e.preventDefault();
     if (username==='visaga' && password ==='123456') {
@@ -61,7 +63,7 @@ const Login = () => {
   };
 
   return (
-    <div className="log">
+    <div className="login_page">
       <div className="login_header">
         {message.error ? <p>{message.msg}</p> : ""}
       </div>
@@ -70,7 +72,7 @@ const Login = () => {
       </div>
       <div className="login_form">
         <div className="login_head">
-          <h4>Member Login</h4>
+          <h4>CREW Login</h4>
         </div>
         <form onSubmit={loginhandler}>
           <div className="login_username">
@@ -98,7 +100,7 @@ const Login = () => {
             </Button>
           </div>
         </form>
-        <div className="login_p">
+        <div className="login_para">
           <p>Forgot Password?</p>
           <p>New User?</p>
         </div>

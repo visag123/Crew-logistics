@@ -16,7 +16,8 @@ const Editpage = () => {
     const [lifespanTo,setLifeSpanTo] = useState('');
      const navigate = useNavigate();
      const { usersId,setUsersid } = useUserAuth();
-    
+
+/// Get user details for edit ///
    const editHandler = async () => {
         try {
         const docSnap = await UserDataService.getUser(usersId);
@@ -37,7 +38,8 @@ const Editpage = () => {
           editHandler();
         }
       }, [usersId]);
-       
+      
+/// Update user details ///   
       const submitHandler = async(e) =>{
         e.preventDefault();
         const newuser = {

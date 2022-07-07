@@ -24,6 +24,7 @@ const Signup = () => {
     setTimeout(() => {setMessage({ error: false, msg: "" });
   }, 3000);}
 
+/// Find username is already exist or not //
   const usernameChange =async (e)=>{
     setUsername(e.target.value)
     const userref = userrep.current.value
@@ -38,6 +39,7 @@ const Signup = () => {
           }
      })
 }
+/// Find email is already exist or not //
   const emailChange = async (e)=>{
     setEmail(e.target.value)
     const emailref=emailrep.current.value
@@ -57,6 +59,7 @@ const Signup = () => {
     }
      })
 }
+/// Signup form submit fn //
   const formsubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -86,15 +89,16 @@ const Signup = () => {
     setPassword("");
     setConfirmPassword("")
   };
+
   return (
-    <div className="sign">
+    <div className="sign_page">
       <div className="signup_header">
         {message.error ? <p>{message.msg}</p> : ""}
       </div>
       <div className="signup_home">
         <img src={logo} alt="image" />
       </div>
-      <div className="signup">
+      <div className="signup_form">
         <form className="row g-3" onSubmit={formsubmit}>
           <div className="col-md-6">
             <Input

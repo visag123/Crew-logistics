@@ -18,15 +18,15 @@ function App() {
       <UserAuthContextProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Login />}></Route>
-            <Route path="/sidebar" element={<Sidebar />}></Route>
-            <Route path="/reset" element={<Resetpassword />}></Route>
-            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/" element={<Login />}/>
+            <Route path="/sidebar" element={<Sidebar />}/>
+            <Route path="/reset" element={<Resetpassword />}/>
+            <Route path="/signup" element={<Signup />}/>
             <Route path="/admin" element={<SysAdminpage/>}>
-            <Route path="crew" element={<CrewAdmin />}></Route>
-            <Route path="trans" element={<TransportAdmin />}></Route>
-            <Route path="edit" element={<Editpage/>}></Route>
-            <Route path="users" element={<Userlist />}></Route>
+            <Route path="crew" element={<CrewAdmin />}/>
+            <Route path="trans" element={<TransportAdmin />}/>
+            <Route path="edit" element={<Editpage/>}/>
+            <Route path="users" element={<Userlist />}/>
             </Route>
           </Routes>
         </Router>

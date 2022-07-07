@@ -29,6 +29,7 @@ const Sidebar = () => {
       </section>
     </div>
   );
+  
 }
 
 export default Sidebar

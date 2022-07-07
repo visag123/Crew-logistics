@@ -46,7 +46,6 @@
     padding: 5px 10px;
     text-align: center;
     border-radius: 5px;
-    /* background: blue; */
     margin-top: 20px;
 
 }
@@ -80,13 +79,16 @@
 }
 .set_role  i{
     text-align: center;
-    color: rgb(64, 161, 161);
+    color: rgb(69, 87, 209);
     margin-left: 17px;
     font-size: 130%;
 }
 .set_role p{
-  color: rgb(162, 67, 67);
+  color: rgb(158, 98, 98);
   font-weight: bold;
+}
+.set_role p:hover{
+    color: rgb(69, 87, 209);
 }
 .edit_role{
     padding:2px 15px 0px 15px;
@@ -95,13 +97,13 @@
 }
 .edit_role a{
   text-decoration: none;
-  color: rgb(162, 67, 67);
+  color: rgb(158, 98, 98);
   font-weight: bold;
 
 }
 .edit_role  i{
     text-align: center;
-    color: rgb(65, 159, 159);
+    color: rgb(69, 87, 209);
     margin-left: 25px;
     font-size: 130%;
 }
@@ -120,11 +122,10 @@ border-collapse: collapse;
 
 }
 thead th{
-    background-color:#FFFFFF;
-    color: rgb(53, 52, 52);
+    color: rgb(78, 75, 75);
     font-size: 16px;
     padding: 15px 10px;
-    text-align: center;
+    background-color: #a6e0fa;
     border-bottom: 0.4px solid rgb(203, 199, 199);
 }
 tbody td{
@@ -144,15 +145,15 @@ tbody td:last-child{
 
 }
 .fa-circle-check{
-    font-size: 140%;
+    font-size: 130%;
     color: blue;
 }
 .fa-trash-can{
-    font-size: 135%;
+    font-size: 125%;
     margin-left: 10px;
     color: rgb(250, 8, 36); 
 }
 tr:hover td{
-    background-color: rgb(196, 211, 242);
+    background-color: #d7e9f0;
     
 }

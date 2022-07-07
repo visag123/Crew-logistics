@@ -17,24 +17,28 @@ const Userlist = () => {
     getUsers();
   }, []);
 
+/// Fetch users datas from the firebase ///
   const getUsers = async () => {
     const data = await UserDataService.getAllUsers();
     setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
+/// Filter non-assigned role users data ///
   const setRolehandler = () => {
     setError(!error);
   };
-
+/// Search users by name ///
   const searchHandler = (e) => {
     const searchrf = searchinput.current.value;
     setSearchUsers(searchrf);
 
   };
+/// Clears notification messages ///
   const clearMassage = () =>{
     setTimeout(() => {
     setMessage({ error: false, msg: "" });
   }, 3000);}
 
+///  Save users updated data by Admin ///
   const acceptuser = async (userId, username,email,password,status,role)=> {
     const user = {
       userId,
@@ -62,13 +66,15 @@ const Userlist = () => {
       clearMassage()
     }
   };
+
+/// Delete users data from firebase /// 
   const rejectuser = async (id) => {
     await UserDataService.deleteUsers(id);
     getUsers();
     setMessage({ error: true, msg: "Delete Successfully" });
     clearMassage()
-
   };
+  
   return (
     <>
       <div className="head_navbar">

@@ -8,6 +8,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
+
 const userCollectionRef = collection(db, "users");
 const adminCollectionRef = collection(db, "acceptUser");
 class UserDataService {

@@ -14,7 +14,7 @@ const SysAdminpage = () => {
           <Sidebar />
         </div>
         <div className="maincontent">
-        <Outlet/>
+          <Outlet />
         </div>
       </div>
     </div>

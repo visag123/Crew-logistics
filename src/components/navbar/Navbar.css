@@ -24,7 +24,7 @@
   }
   
   .logo font {
-    color: #124278;
+    color: #004387;
     font-size: 20px;
   }
   .navlink {
@@ -47,7 +47,7 @@
   .navlink li i {
     text-decoration: none;
     background:none;
-    color: #5d80cd;
+    color: rgb(69, 87, 209);
   }
   .navlink li i:hover{
     color: #991265;

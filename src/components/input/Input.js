@@ -2,6 +2,7 @@ import React from 'react';
 
 const Input = (props) => {
     const{type,id,className,placeholder,label,name,value,onChange,disabled} =props
+    
   return (
     <div className='input_js'>
         <label htmlFor={id} >{label}</label>

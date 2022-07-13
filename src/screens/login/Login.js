@@ -13,7 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState({ error: false, msg: "" });
   const navigate = useNavigate();
-  const { logIn,setUserInfo } = useUserAuth();
+  const { setUserInfo,setIsAuth,isAuth,setCrew } = useUserAuth();
 
   /// Clear notification messages /// 
   const clearMassage = () =>{
@@ -26,6 +26,7 @@ const Login = () => {
     e.preventDefault();
     if (username==='visaga' && password ==='123456') {
       setUserInfo({initial:true , nameId:username})
+      setIsAuth(!isAuth)
         navigate("/admin")
         return;
       }
@@ -39,9 +40,12 @@ const Login = () => {
            if (newdata.status === "Active") {
              if (newdata.role === "Crew Admin") {
               setUserInfo({initial:true , nameId:username})
+              setCrew(true)
+               setIsAuth(!isAuth)
                navigate("/admin/crew");
              } else if (newdata.role === "Transport Admin") {
               setUserInfo({initial:true , nameId:username})
+              setIsAuth(!isAuth)
                navigate("/admin/trans");
              } else {
                navigate("/");
@@ -63,6 +67,7 @@ const Login = () => {
   };
 
   return (
+   <>
     <div className="login_page">
       <div className="login_header">
         {message.error ? <p>{message.msg}</p> : ""}
@@ -114,6 +119,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+   </>
   );
 };
 

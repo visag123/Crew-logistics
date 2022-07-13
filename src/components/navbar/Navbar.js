@@ -7,6 +7,7 @@ const Navbar = () => {
   const { userInfo } = useUserAuth();
 
   return (
+   <>
     <div className="nav">
       <h2 className="logo">
         <i className="fa-solid fa-plane-departure"></i>
@@ -28,6 +29,7 @@ const Navbar = () => {
         </li>
       </ul>
     </div>
+   </>
   );
 }
 

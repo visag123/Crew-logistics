@@ -7,17 +7,19 @@ import { Outlet } from "react-router-dom";
 const SysAdminpage = () => {
  
   return (
-    <div className="systemadmin">
-      <Navbar />
-      <div className="content">
-        <div className="sidecontent">
-          <Sidebar />
-        </div>
-        <div className="maincontent">
-          <Outlet />
+    <>
+      <div className="systemadmin">
+        <Navbar />
+        <div className="content">
+          <div className="sidecontent">
+            <Sidebar />
+          </div>
+          <div className="maincontent">
+            <Outlet />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

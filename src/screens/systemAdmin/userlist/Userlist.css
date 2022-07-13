@@ -125,7 +125,8 @@ thead th{
     color: rgb(78, 75, 75);
     font-size: 16px;
     padding: 15px 10px;
-    background-color: #a6e0fa;
+    color: #ffffff;
+    background-color: rgb(23, 123, 216);
     border-bottom: 0.4px solid rgb(203, 199, 199);
 }
 tbody td{

@@ -11,6 +11,8 @@ import {
 
 const userCollectionRef = collection(db, "users");
 const adminCollectionRef = collection(db, "acceptUser");
+const crewCollectionRef = collection(db, "roster");
+const crewMemberCollectionRef = collection(db, "crew member");
 class UserDataService {
   addUsers = (newUser) => {
     return addDoc(userCollectionRef, newUser);
@@ -18,9 +20,16 @@ class UserDataService {
   addUser = (users) => {
     return addDoc(adminCollectionRef, users);
   };
+  addCrewMember = (crew) => {
+    return addDoc(crewMemberCollectionRef, crew);
+  };
   updateUser = (id, updatedUser) => {
     const userDoc = doc(db, "users", id);
     return updateDoc(userDoc, updatedUser);
+  };
+  updateCrew = (id, updatedCrew) => {
+    const crewDoc = doc(db, "crew member", id);
+    return updateDoc(crewDoc, updatedCrew);
   };
 
   deleteUsers = (id) => {
@@ -31,10 +40,22 @@ class UserDataService {
   getAllUsers = () => {
     return getDocs(userCollectionRef);
   };
+  
+  getCrewusers = ()=>{
+    return getDocs(crewCollectionRef);
 
+  }
+  getCrewMember = ()=>{
+    return getDocs(crewMemberCollectionRef);
+
+  }
   getUser = (id) => {
     const userDoc = doc(db, "users", id);
     return getDoc(userDoc);
+  };
+  getCrew = (id) => {
+    const crewDoc = doc(db, "crew member", id);
+    return getDoc(crewDoc);
   };
 }
 export default new UserDataService();

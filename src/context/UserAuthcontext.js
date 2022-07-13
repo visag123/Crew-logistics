@@ -10,8 +10,12 @@ const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
   
-  const [userInfo,setUserInfo] = useState({initial:false,nameId :''})
+  const [userInfo,setUserInfo] = useState({initial:false,nameId :''});
+  const [crew,setCrew] = useState(false)
+  const [isAuth,setIsAuth] =useState(false)
   const [usersId,setUsersid]=useState('');
+  // const [crewId,setCrewId]=useState('');
+
   const getUserId=(id)=>{
         setUsersid(id);
   }
@@ -32,11 +36,15 @@ export function UserAuthContextProvider({ children }) {
         logIn,
         signUp,
         logOut,
+        isAuth,
+        setIsAuth,
         userInfo,
         setUserInfo,
         usersId,
         setUsersid,
         getUserId,
+        crew,
+        setCrew
       }}
     >
       {children}

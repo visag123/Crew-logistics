@@ -1,0 +1,68 @@
+.editCrewHome{
+    width: 800px;
+    margin:20px auto;
+    border: 1px solid rgb(234, 230, 230);
+    padding: 30px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.19);
+    background-color: #ffff;
+    border-radius: 6px;
+}
+.editCrew{
+    display: flex;
+    width: 100%;
+}
+.editCrew input{
+    width: 240px;
+    font-size: 14px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    margin-right: 148px;
+    outline: none;
+}
+.editCrew label{
+    font-weight: bolder;
+    font-size: 16px;
+    padding-bottom: 5px;
+    color: #17ac9d;
+
+}
+.editCrewAdd{
+  display: flex;
+  width: 350px;
+  position: relative;
+}
+.editCrewAdd input{
+    width: 100px;
+    margin-right: 8px;
+}
+.editCrewMob{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.editCrewMob label{
+    font-weight: bolder;
+    font-size: 16px;
+    padding-bottom: 5px;
+    color: #17ac9d;
+
+}
+.editMob input{
+    width: 240px;
+    font-size: 14px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    outline: none;
+}
+.editAdd{
+    width: 320px;   
+}
+.editCrewAddress input{
+    margin-bottom: 8px;
+    padding-left: 5px;
+    outline: none;
+    
+}
+
+
+

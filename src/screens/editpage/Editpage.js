@@ -56,6 +56,7 @@ const Editpage = () => {
         try {
             if (usersId !== undefined && usersId !== "") {
               await UserDataService.updateUser(usersId, newuser);
+              console.log(lifespanTo);
               setUsersid("");
               navigate('/admin/users')
           }

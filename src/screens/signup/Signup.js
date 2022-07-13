@@ -1,4 +1,4 @@
-import React, { useState,useRef, useCallback } from "react";
+import React, { useState,useRef} from "react";
 import "./Signup.css";
 import { Link } from "react-router-dom";
 import UserDataService from "../../firebase/userservice";
@@ -91,12 +91,13 @@ const Signup = () => {
   };
 
   return (
+   <>
     <div className="sign_page">
       <div className="signup_header">
         {message.error ? <p>{message.msg}</p> : ""}
       </div>
       <div className="signup_home">
-        <img src={logo} alt="image" />
+        <img src={logo} alt="plane" />
       </div>
       <div className="signup_form">
         <form className="row g-3" onSubmit={formsubmit}>
@@ -183,6 +184,7 @@ const Signup = () => {
         </form>
       </div>
     </div>
+   </>
   );
 };
 export default Signup;

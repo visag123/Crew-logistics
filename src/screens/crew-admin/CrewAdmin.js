@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./Crew.css";
 
 const CrewAdmin = () => {
   return (
     <>
-      Crew_admin  
+    <Outlet/> 
     </>
   );
 };

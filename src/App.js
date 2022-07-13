@@ -10,9 +10,13 @@ import Sidebar from "./components/sidebar/Sidebar";
 import TransportAdmin from "./screens/transport-admin/TransportAdmin";
 import CrewAdmin from "./screens/crew-admin/CrewAdmin";
 import Userlist from "./screens/systemAdmin/userlist/Userlist";
+import ProtectedRoute from "./protectedRoute/ProtectedRoute";
+import Roster from "./screens/crew-admin/Roster/Roster";
+import ManageCrew from "./screens/crew-admin/ManageCrew/ManageCrew";
+import EditCrew from "./screens/crew-admin/manage-crewMember/Add/EditCrew";
+import ViewMember from "./screens/crew-admin/ViewMember/ViewMember";
 
 function App() {
-
   return (
     <div className="App">
       <UserAuthContextProvider>
@@ -22,11 +26,16 @@ function App() {
             <Route path="/sidebar" element={<Sidebar />}/>
             <Route path="/reset" element={<Resetpassword />}/>
             <Route path="/signup" element={<Signup />}/>
-            <Route path="/admin" element={<SysAdminpage/>}>
-            <Route path="crew" element={<CrewAdmin />}/>
-            <Route path="trans" element={<TransportAdmin />}/>
+            <Route path="/admin" element={<ProtectedRoute><SysAdminpage/></ProtectedRoute>}>           
             <Route path="edit" element={<Editpage/>}/>
             <Route path="users" element={<Userlist />}/>
+            <Route path="trans" element={<TransportAdmin />}/>
+            <Route path="crew" element={<CrewAdmin />}>
+            <Route path="roster" element={<Roster/>}/>
+            <Route path="manageCrew" element={<ManageCrew/>}/>
+            <Route path="viewCrew" element={<ViewMember/>}/>
+            <Route path="editCrew" element={<EditCrew/>}/>
+            </Route>
             </Route>
           </Routes>
         </Router>

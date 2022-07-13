@@ -123,11 +123,13 @@ const Userlist = () => {
           </thead>
           <tbody>
             {users.filter((doc)=>{
-              if (searchUsers === undefined && error === false){
+              if (searchUsers === '' && error === false){
                  return doc
-              } else if (  error === false && doc.username.toLowerCase().includes(searchUsers.toLocaleLowerCase())){
+              } 
+              else if (  error === false && doc.username.toLowerCase().includes(searchUsers.toLowerCase())){
                 return doc
-              } else if (error === true )
+              }
+               else if (error === true )
                return doc.role ==="NA"
             })
             .map((doc) => {

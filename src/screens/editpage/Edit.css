@@ -114,7 +114,6 @@
 }
 .editUser_button{
     display: flex;
-    /* justify-content: space-between; */
     gap: 150px;
     margin-top: 55px;
 }

@@ -1,20 +1,21 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./screens/login/Login";
-import Resetpassword from "./screens/resetpassword/Resetpassword";
-import Signup from "./screens/signup/Signup";
-import SysAdminpage from "./screens/systemAdmin/SysAdminpage";
-import { UserAuthContextProvider } from "./context/UserAuthcontext";
-import Editpage from "./screens/editpage/Editpage";
-import Sidebar from "./components/sidebar/Sidebar";
-import TransportAdmin from "./screens/transport-admin/TransportAdmin";
-import CrewAdmin from "./screens/crew-admin/CrewAdmin";
-import Userlist from "./screens/systemAdmin/userlist/Userlist";
-import ProtectedRoute from "./protectedRoute/ProtectedRoute";
-import Roster from "./screens/crew-admin/Roster/Roster";
-import ManageCrew from "./screens/crew-admin/ManageCrew/ManageCrew";
-import EditCrew from "./screens/crew-admin/manage-crewMember/Add/EditCrew";
-import ViewMember from "./screens/crew-admin/ViewMember/ViewMember";
+import Login from "./screens/Login/Login";
+import Resetpassword from "./screens/ResetPassword/Resetpassword";
+import Signup from "./screens/Signup/Signup";
+import SysAdminpage from "./screens/SystemAdmin/SysAdminpage";
+import { UserAuthContextProvider } from "./Context/UserAuthcontext";
+import Editpage from "./screens/SystemAdmin/EditPage/Editpage";
+import Sidebar from "./components/Sidebar/Sidebar";
+import TransportAdmin from "./screens/TransportAdmin/TransportAdmin";
+import CrewAdmin from "./screens/CrewAdmin/CrewAdmin";
+import Userlist from "./screens/SystemAdmin/Userlist/Userlist";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import Roster from "./screens/CrewAdmin/Roster/Roster";
+import ManageCrew from "./screens/CrewAdmin/ManageCrew/ManageCrew";
+import EditCrew from "./screens/CrewAdmin/ManageCrewMember/EditCrew";
+import ViewMember from "./screens/CrewAdmin/ViewMember/ViewMember";
+import AddCrew from "./screens/CrewAdmin/ManageCrew/AddCrew";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="manageCrew" element={<ManageCrew/>}/>
             <Route path="viewCrew" element={<ViewMember/>}/>
             <Route path="editCrew" element={<EditCrew/>}/>
+            <Route path="addCrew" element={<AddCrew/>}/>
             </Route>
             </Route>
           </Routes>

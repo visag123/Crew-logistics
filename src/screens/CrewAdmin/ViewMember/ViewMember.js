@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserDataService from "../../../firebase/userservice";
 import { Link, useNavigate } from "react-router-dom";
-import { useUserAuth } from "../../../context/UserAuthcontext";
+import { useUserAuth } from "../../../Context/UserAuthcontext";
 
 const ViewMember = () => {
   const [crewMember, setCrewMember] = useState([]);
@@ -30,7 +30,7 @@ const ViewMember = () => {
           </button>
           <input type="text" placeholder="search" />
         </form>
-        <i class="fa-solid fa-circle-plus" onClick={addCrewMember}></i>
+        <i className="fa-solid fa-circle-plus" onClick={addCrewMember}></i>
       </div>
       <div className="sys-table">
         <table>

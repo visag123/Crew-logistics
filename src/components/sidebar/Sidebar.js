@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Sidebar.css";
 import { Link, useNavigate, } from "react-router-dom";
-import { useUserAuth } from '../../context/UserAuthcontext';
+import { useUserAuth } from '../../Context/UserAuthcontext';
 
 const Sidebar = () => {
     const {isAuth,setIsAuth,crew,setCrew} =useUserAuth();
@@ -24,12 +24,12 @@ const Sidebar = () => {
               <i className="fa-solid fa-id-card"/> Users
               </li>)}
             </Link>
-            <Link to="crew/viewCrew">
-             {crew? (<li>Manage Crew Members</li>):
+            
+             {crew? (<Link to="crew/viewCrew"><li> Manage Crew Members </li></Link>):
               (<li>
                <i className="fa-solid fa-file-lines"></i> Contacts
               </li>)}
-            </Link>
+            
             <Link to="crew/roster">
              {crew && <li>
                 View Roster

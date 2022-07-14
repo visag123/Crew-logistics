@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import { useNavigate } from "react-router";
-import UserDataService from "../../firebase/userservice";
-import Input from '../../components/input/Input';
+import UserDataService from "../../../firebase/userservice";
+import Input from '../../../components/Input/Input';
 import "./Edit.css"
-import { useUserAuth } from '../../context/UserAuthcontext';
+import { useUserAuth } from '../../../Context/UserAuthcontext';
 
 const Editpage = () => {
     const [userId,setUserId] = useState('');
@@ -155,6 +155,7 @@ const Editpage = () => {
                     <Input
                       type="date"
                       className="lifeSpan_time"
+                      placeholder="from"
                       value={lifespanFrom}
                       onChange={(e) => {
                         setLifeSpanFrom(e.target.value);
@@ -165,6 +166,7 @@ const Editpage = () => {
                       type="date"
                       value={lifespanTo}
                       className="lifeSpan_time"
+                      placeholder="to"
                       onChange={(e) => {
                         setLifeSpanTo(e.target.value);
                       }}

@@ -63,7 +63,7 @@
     border: none;
     outline: none;
     margin:10px 0px 25px 0px;
-    border-bottom: 1px solid #17ac9d;
+    border-bottom: 1px solid #004387;
 }
 .editUser_status{
     display: flex;
@@ -76,7 +76,7 @@
     margin:10px 0px 25px 0px;
     border: none;
     outline: none;
-    border-bottom: 1px solid #17ac9d;
+    border-bottom: 1px solid #004387;
     
 }
 .editUser{
@@ -90,7 +90,7 @@
     border: none;
     outline: none;
     margin:10px 0px 25px 0px;
-    border-bottom: 1px solid #17ac9d;
+    border-bottom: 1px solid #004387;
     
 }
 .editUser select{
@@ -99,7 +99,7 @@
     margin:10px 0px 25px 0px;
     border: none;
     outline: none;
-    border-bottom: 1px solid #17ac9d;
+    border-bottom: 1px solid #004387;
     
 }
 .editUser_input{
@@ -110,7 +110,7 @@
 .edit label{
     font-weight: bolder;
     padding-bottom: 5px;
-    color: #17ac9d;
+    color: #004387;
 }
 .editUser_button{
     display: flex;
@@ -120,12 +120,7 @@
 .editUser_button button{
     width: 200px;
     margin-left: 20px;
-    background-color: #17ac9d;
+    background-color: #0b65c0;
     border-radius: 10px;
     border: none;
-}
-.editUser_button button:hover{
-    background-color: #17ac9d;
-
-
 }

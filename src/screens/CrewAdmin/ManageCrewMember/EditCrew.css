@@ -23,7 +23,7 @@
     font-weight: bolder;
     font-size: 16px;
     padding-bottom: 5px;
-    color: #17ac9d;
+    color: #004387;
 
 }
 .editCrewAdd{
@@ -34,6 +34,7 @@
 .editCrewAdd input{
     width: 100px;
     margin-right: 8px;
+    font-size: 14px;
 }
 .editCrewMob{
     display: flex;
@@ -44,7 +45,7 @@
     font-weight: bolder;
     font-size: 16px;
     padding-bottom: 5px;
-    color: #17ac9d;
+    color: #004387;
 
 }
 .editMob input{
@@ -60,6 +61,7 @@
 .editCrewAddress input{
     margin-bottom: 8px;
     padding-left: 5px;
+    font-size: 14px;
     outline: none;
     
 }

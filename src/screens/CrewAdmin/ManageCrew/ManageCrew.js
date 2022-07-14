@@ -25,7 +25,7 @@ const ManageCrew = () => {
               </button>
               <input type="text" placeholder="search" />
             </form>
-            <i class="fa-solid fa-circle-plus"></i>
+            <i className="fa-solid fa-circle-plus"></i>
           </div>
      <div className="sys-table">
         <table>
@@ -41,7 +41,7 @@ const ManageCrew = () => {
             {travel.map((doc) => {
               return (
                 <tr key={doc.id}>
-                  <td><Link to=''>{doc.FlightNo}</Link></td>
+                  <td><Link to='/admin/crew/addCrew'>{doc.FlightNo}</Link></td>
                   <td className='No_of_crew'>{doc.CrewMembers}</td>
                   <td>{doc.FlightRoute}</td>
                   <td>{doc.FlightDateTime}</td>

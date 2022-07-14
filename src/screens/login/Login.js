@@ -2,11 +2,11 @@ import React, {  useState } from "react";
 import  "./Login.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useUserAuth } from "../../context/UserAuthcontext";
+import { useUserAuth } from "../../Context/UserAuthcontext";
 import UserDataService from"../../firebase/userservice";
-import logo from "../../images/landscape-view.jpg"
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
+import logo from "../../assets/landscape-view.jpg"
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
 
 const Login = () => {
   const [username, setUsername] = useState("");

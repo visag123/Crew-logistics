@@ -18,7 +18,7 @@ import ViewMember from './screens/CrewAdmin/ViewMember/ViewMember';
 import AddCrew from "./screens/CrewAdmin/ManageCrew/AddCrew";
 import ManageDrivers from "./screens/TransportAdmin/Manage Drivers/ManageDrivers";
 import AddDrivers from "./screens/TransportAdmin/Manage Drivers/Add Drivers";
-import Viewcabs from "./screens/TransportAdmin/View Cap Details/Viewcabs";
+import Viewcabs from "./screens/TransportAdmin/View Cab Details/Viewcabs";
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
             <Route path="trans" element={<TransportAdmin />}>
             <Route path="manageDrivers" element={<ManageDrivers/>}/>
             <Route path="addDrivers" element={<AddDrivers />}/>
-            <Route path="viewcabs" element={<Viewcabs/>} />
+            <Route path="viewcabs" element={<Viewcabs/>}/>
             </Route>
             <Route path="crew" element={<CrewAdmin />}>
             <Route path="roster" element={<Roster/>}/>

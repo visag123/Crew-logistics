@@ -13,6 +13,7 @@ const userCollectionRef = collection(db, "users");
 const adminCollectionRef = collection(db, "acceptUser");
 const crewCollectionRef = collection(db, "roster");
 const crewMemberCollectionRef = collection(db, "crew member");
+const cabDriverCollectionRef = collection(db, "cabdrivers");
 class UserDataService {
   addUsers = (newUser) => {
     return addDoc(userCollectionRef, newUser);
@@ -57,5 +58,13 @@ class UserDataService {
     const crewDoc = doc(db, "crew member", id);
     return getDoc(crewDoc);
   };
+  addDriver =(driver)=>{
+    return addDoc(cabDriverCollectionRef, driver);
+  }
+  getDrivers = () => {
+    return getDocs(cabDriverCollectionRef);
+  };
+  
+  
 }
 export default new UserDataService();

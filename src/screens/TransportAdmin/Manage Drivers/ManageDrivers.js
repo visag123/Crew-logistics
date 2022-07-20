@@ -2,12 +2,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "./ManageDrivers.css"
-
+import UserDataService from "../../../firebase/userservice";
 
 
 const ManageDrivers = () => {
   
+const [drivers, upadateDrivers] = useState([]);
+  
    const navigate = useNavigate()
+   const getcabDriver = async () => {
+    const data = await UserDataService.getDrivers();
+    if(data){
+      upadateDrivers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+  };
+   useEffect(()=>{
+    getcabDriver();
+   },[])
   
    return (
     <>
@@ -35,15 +47,14 @@ const ManageDrivers = () => {
             </tr>
           </thead>
           <tbody>
-            {[].map((doc) => {
+            {drivers.map((doc) => {
               return (
                 <tr key={doc.id}>
-                  <td className='text-info text-decoration-underline'
-                   >
-                    <span role="button" tabIndex="0">{doc.DriverName}</span></td>
-                  <td className='No_of_crew'>{doc.UserId}</td>
+                  <td className='text-info text-decoration'>
+                    {doc.firstname}</td>
+                  <td className='No_of_crew'>{doc.userId}</td>
                   <td>{doc.status}</td>
-                  <td>{doc.contactNumber}</td>
+                  <td>{doc.PrimaryNumber}</td>
                   <td>{doc.serviceArea}</td>
                   <td>{doc.assignedCab}</td>
                 </tr>

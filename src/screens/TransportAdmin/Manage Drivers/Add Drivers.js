@@ -1,16 +1,69 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import "./addDrivers.css"
 import Input from '../../../components/input/Input';
+import UserDataService from "../../../firebase/userservice";
+import { useUserAuth } from '../../../context/UserAuthcontext';
 
 
 const AddDrivers = () => {
+    const [cabDrivers, setcabDrivers] = useState({
+        firstname: '',
+        lastname: '',
+        dob: '',
+        userId: '',
+        gender: '',
+        PrimaryNumber: "",
+        secondaryNumber: "",
+        status: '',
+        serviceArea: "",
+        shiftTimings: "",
+        emailAdress: "",
+        addline1: "",
+        addline2: "",
+        city: "",
+        state: "",
+        pincode: "",
+    })
+    const navigate = useNavigate();
+    const { usersId, setUsersid } = useUserAuth();
+
+    const { firstname, lastname,
+        dob, userId, gender, status,
+        serviceArea, shifttimings, emailAdresss,
+        PrimaryNumber, secondaryNumber, addline1, addline2, city, state, pincode } = cabDrivers
+
+     const handlechange = (e) => {
+        let { name, value } = e.target;
+         setcabDrivers({ ...cabDrivers, [name]: value })
+    }
+    
+
+
+    // /// ADD/ Drivers Fn ////
+    const submitHandler =  async(e) => {
+        e.preventDefault();
+        const result =  await UserDataService.addDriver(cabDrivers);
+        if(result){
+            navigate("/admin/trans/manageDrivers");
+        }else{
+
+        }
+        }
+
+    const closeChange = () => {
+        setUsersid("")
+        navigate('/admin/trans/manageDrivers')
+
+    }
 
     const url = "https://www.pikpng.com/pngl/b/75-757195_user-png.png"
     return (
         <>
             <div className="editpage_edit">
                 <div className="editAddHome">
-                    <form >
+                    <form onSubmit={submitHandler}>
                         <div className='gridContainer'>
                             <div className='gridItem'>
                                 <div className="input-group">
@@ -19,16 +72,18 @@ const AddDrivers = () => {
                                         type="text"
                                         name="firstname"
                                         className="input-controls"
-
+                                        value={firstname}
+                                        onChange={handlechange}
                                     />
                                 </div>
                                 <div className="input-group">
-                                    <label htmlFor="date of birth">Date Of Birth</label>
+                                    <label htmlFor="dob">Date Of Birth</label>
                                     <Input
-                                        type="text"
-                                        name="date of birth"
+                                        type="date"
+                                        name="dob"
                                         className="input-controls"
-
+                                        value={dob}
+                                        onChange={handlechange}
                                     />
                                 </div>
                                 <div className="input-group">
@@ -37,61 +92,66 @@ const AddDrivers = () => {
                                         type="text"
                                         name="gender"
                                         className="input-controls"
-
+                                        value={gender}
+                                        onChange={handlechange}
                                     />
                                 </div>
                                 <div className="input-group">
-                                    <label htmlFor="primary number">Primary Number</label>
+                                    <label htmlFor="PrimaryNumber">Primary Number</label>
                                     <Input
                                         type="text"
-                                        name="primary number"
+                                        name="PrimaryNumber"
                                         className="input-controls"
-
+                                        value={PrimaryNumber}
+                                        onChange={handlechange}
                                     />
                                 </div>
                                 <div className="input-group">
-                                    <label htmlFor="secondary number">Secondary Number</label>
+                                    <label htmlFor="secondaryNumber">Secondary Number</label>
                                     <Input
                                         type="text"
-                                        name="secondary number"
+                                        name="secondaryNumber"
                                         className="input-controls"
-
+                                        value={secondaryNumber}
+                                        onChange={handlechange}
                                     />
                                 </div>
                                 <div className="input-group">
-                                    <label htmlFor="email adress">Email Address</label>
+                                    <label htmlFor="emailAdress">Email Address</label>
                                     <Input
-                                        type="text"
-                                        name="email adress"
+                                        type="email"
+                                        name="emaildress"
                                         className="input-controls"
-
+                                        value={emailAdresss}
+                                        onChange={handlechange}
                                     />
                                 </div>
                                 <br></br><br></br>
-                                <div style={{ position: "relative", top: 8 }}>
-                                    <button type="reset" className="btn btn-primary pos">
+                                <div style={{ position: "relative", top: 24 }}>
+                                    <button type="submit" className="btn btn-primary pos">
                                         Save
                                     </button>
                                 </div>
                             </div>
-
                             <div className='gridId'>
                                 <div className="input-group">
-                                    <label htmlFor="lasstname">Last name</label>
+                                    <label htmlFor="lastname">Last Name</label>
                                     <Input
                                         type="text"
-                                        name="lasttname"
+                                        name="lastname"
                                         className="input-controls"
-
+                                        value={lastname}
+                                        onChange={handlechange}
                                     />
                                 </div>
-
                                 <div className="input-group">
-                                    <label htmlFor="userid">User Id</label>
+                                    <label htmlFor="userId">User ID</label>
                                     <Input
                                         type="text"
-                                        name="userid"
+                                        name="userId"
                                         className="input-controls"
+                                        value={userId}
+                                        onChange={handlechange}
                                     />
                                 </div>
                                 <div className="input-group">
@@ -100,33 +160,37 @@ const AddDrivers = () => {
                                         type="text"
                                         name="status"
                                         className="input-controls"
-
+                                        value={status}
+                                        onChange={handlechange}
                                     />
                                 </div>
-
                                 <div className="input-group">
-                                    <label htmlFor="servicearea">Service Area</label>
+                                    <label htmlFor="serviceArea">Service Area</label>
                                     <Input
                                         type="text"
-                                        name="service "
+                                        name="serviceArea"
                                         className="input-controls"
-
+                                        value={serviceArea}
+                                        onChange={handlechange}
                                     />
                                 </div>
-                                <div style={{ position: "relative", top: 173 }}>
-                                    <button type="reset" className="btn btn-primary">
-                                        Save &Add Another
+                                <div className="input-group">
+                                    <label htmlFor="shifttiming">Shift Timings</label>
+                                    <Input
+                                        type="text"
+                                        name="Shifttimings "
+                                        className="input-controls"
+                                        value={shifttimings}
+                                        onChange={handlechange}
+                                    />
+                                </div>
+                                <div style={{ position: "relative", top: 130 }}>
+                                    <button type="submit" className="btn btn-primary ">{usersId === "" ? "save&add Another" : "Save Another"}
                                     </button>
                                 </div>
-
                             </div>
-
-                            <div className='gridItem'>
-                                <div className="upload">
-                                    <img src={url} alt="profile img" />
-                                    <span>Upload Image</span>
-                                </div>
-                                <br></br><br></br>
+                            <div className='gridItem buttonGrid'>
+                                
                                 <div className='border'>
                                     <div className="edittransAddress">
                                         <div>
@@ -136,52 +200,54 @@ const AddDrivers = () => {
                                                 className="editAdd"
                                                 placeholder="Address Line 1"
                                                 name="addline1"
-
+                                                value={addline1}
+                                                onChange={handlechange}
                                             />
                                             <Input
                                                 type="text"
                                                 className="editAdd"
                                                 placeholder="Address Line 2"
                                                 name="addline2"
-
+                                                value={addline2}
+                                                onChange={handlechange}
                                             />
                                             <div className="editCrewAdd">
                                                 <Input
                                                     type="text"
                                                     placeholder="City"
                                                     name="city"
-
+                                                    value={city}
+                                                    onChange={handlechange}
                                                 />
-                                                <Input
-                                                    type="text"
-                                                    placeholder="State"
-
+                                                <Input 
+                                                type="text"
+                                                name="state"
+                                                placeholder="State"
+                                                value={state}
+                                                onChange={handlechange}
                                                 />
                                                 <Input
                                                     type="number"
                                                     placeholder="Pin code"
                                                     name="pincode"
-
+                                                    className="pincode"
+                                                    value={pincode}
+                                                    onChange={handlechange}
                                                 />
                                             </div>
                                         </div>
                                         <br />
-
-
                                     </div>
-
                                 </div>
-                                <br />
+                                <br></br>
                                 <div>
-                                    <button type="reset" className="btn btn-primary mar " >
+                                    <button type="reset" className="btn btn-primary " onClick={closeChange}>
                                         Close
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                         <div>
-
                         </div>
                     </form>
                 </div>

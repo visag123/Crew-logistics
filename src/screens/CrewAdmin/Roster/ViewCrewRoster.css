@@ -1,0 +1,162 @@
+.CrewRosterData{
+
+    position: absolute;
+    
+    height: 100%;
+    width: 85%;
+
+    top: 5%;
+
+/* border: 2px solid red; */
+
+left: 6%;
+
+display:flexbox;
+
+}
+
+.CrewRosterTop{
+
+display:flex;
+
+padding: 4px;
+
+/* border: 2px solid rgb(0, 51, 255); */
+
+}
+
+.CrewRosterReport{
+
+position: absolute;
+
+right: 0%;
+
+/* border: 1px solid rgba(0, 0, 0, 0.701); */
+
+border-radius: 10px;
+
+padding: 2px;
+
+color: rgb(0, 0, 0);
+
+background-color: rgb(248, 242, 234);
+
+}
+
+.CrewRosterMiddle{
+
+display: flex;
+
+height: 100px;
+
+/* border: 2px solid rgb(0, 51, 255); */
+
+align-items: center;
+
+}
+
+.CrewRosterMiddle span{
+
+padding: 7px;
+
+/* border: 2px solid red; */
+
+display:flexbox;
+
+color: blue;
+
+font-weight: 700;
+
+}
+
+.CrewRosterMiddle hr{
+
+border-bottom:2px solid rgb(0, 0, 0);
+
+width:278px;
+
+}
+
+.CrewRosterData_Wrapper{
+
+/* border: 2px solid red; */
+
+height: 40%;
+
+width: 90%;
+
+position: relative;
+
+top: 15px;
+
+left: 5%;
+
+background-color: white;
+
+}
+
+.CrewRosterDateTime{
+
+/* border: 2px solid red; */
+
+display: flex;
+
+height: 50px;
+
+width: 97%;
+
+position:absolute;
+
+top: 90px;
+
+left: 6px;
+
+}
+
+.CrewRosterDateTimeP1{
+
+flex: 1;
+
+}
+
+.CrewRosterDateTime{
+
+font-family: 'Courier New', Courier, monospace;
+
+font-weight: 600;
+
+}
+
+.CrewRosterFlightNO{
+
+position: absolute;
+
+/* border: 2px solid red; */
+
+top: 42px;
+
+left: 41%;
+
+font-family: 'Courier New', Courier, monospace;
+
+font-weight: 600;
+
+}
+
+.CrewRosterBottom{
+
+margin-top: 35px;
+
+font-family: 'Courier New', Courier, monospace;
+
+font-weight: 600;
+
+}
+
+.CrewRosterTop span{
+
+font-family: 'Courier New', Courier, monospace;
+
+font-weight: 600;
+
+}

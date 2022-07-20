@@ -16,6 +16,10 @@ import ManageCrew from "./screens/CrewAdmin/ManageCrew/ManageCrew";
 import EditCrew from "./screens/CrewAdmin/ManageCrewMember/EditCrew";
 import ViewMember from "./screens/CrewAdmin/ViewMember/ViewMember";
 import AddCrew from "./screens/CrewAdmin/ManageCrew/AddCrew";
+import CrewRoster from "./screens/CrewAdmin/Roster/CrewRoster";
+import { CrewRost } from "./screens/CrewAdmin/Roster/CrewRost";
+import  ViewCrewRoster  from "./screens/CrewAdmin/Roster/ViewCrewRoster";
+
 
 function App() {
   return (
@@ -37,6 +41,9 @@ function App() {
             <Route path="viewCrew" element={<ViewMember/>}/>
             <Route path="editCrew" element={<EditCrew/>}/>
             <Route path="addCrew" element={<AddCrew/>}/>
+            <Route path="crewRoster" element={<CrewRoster/>}/>
+            <Route path="crewRost" element={<CrewRost/>}/>
+            <Route path="viewcrewRost" element={<ViewCrewRoster/>}/>
             </Route>
             </Route>
           </Routes>

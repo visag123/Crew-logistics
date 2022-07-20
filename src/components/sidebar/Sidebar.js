@@ -32,7 +32,7 @@ const Sidebar = () => {
             
             <Link to="crew/roster">
              {crew && <li>
-                View Roster
+                Flight Schedule
               </li>}
             </Link>
             <Link to="">

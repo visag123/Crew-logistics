@@ -10,7 +10,7 @@ const firebaseConfig = {
   messagingSenderId: "37595545519",
   appId: "1:37595545519:web:4b178d44b06b5096c9f95a",
   measurementId: "G-NDGFC55Q9V"
-
+  
   // apiKey: "AIzaSyC6q7r2fvPo7FQjYMIGYh19VF9OwZwzfWk",
   // authDomain: "react-login-233d2.firebaseapp.com",
   // projectId: "react-login-233d2",

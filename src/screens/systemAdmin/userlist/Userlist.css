@@ -139,12 +139,12 @@ tbody td:last-child{
     text-align: center;
 
 }
-.sys-table button{
+/* .sys-table button{
     outline: none;
     border: none;
     background: none;
 
-}
+} */
 .fa-circle-check{
     font-size: 130%;
     color: blue;

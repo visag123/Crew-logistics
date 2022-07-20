@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import "./Userlist.css";
 import UserDataService from "../../../firebase/userservice";
 import { useState, useEffect } from "react";
-import { useUserAuth } from "../../../Context/UserAuthcontext";
+import { useUserAuth } from "../../../context/UserAuthcontext";
 import { Link } from "react-router-dom";
 
 const Userlist = () => {

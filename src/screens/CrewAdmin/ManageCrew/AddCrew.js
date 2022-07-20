@@ -35,7 +35,34 @@ const AddCrew = () => {
     }
   }, [usersId]);
 
+  const [selectedCrew, updateSelectedCrew] = useState([]);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  
+  // const selectedCrew = (doc) => {
+    
+  //   // updateSelectedCrew(selectedCrew =>
+  //   //   selectedCrew.map(obj=>{
+  //   //     if(obj.userId === doc.map(id=>id.userId)){
+  //   //       return {...obj};
+  //   //     }
+  //   //     return {...obj,doc};
+  //   //   })
+  //   //   );
+  // }
+  const saveCrewMembers = () => {
+    console.log(selectedCrew);
+  }
+  const handleDate = (e) => {
+    console.log(e.target.value)
+  }
+  const handleClose = () => {
+    navigate('/admin/crew/manageCrew');
+  }
   useEffect(() => {
+
     getCrewMember();
   }, []);
 

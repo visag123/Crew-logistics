@@ -1,0 +1,96 @@
+.gridContainer{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.input-group{
+    display: flex;
+    color:#1a1f83;
+    font-weight: 700;
+    font-size: 16px;
+}
+.input-controls{
+    
+    line-height: 30px;
+    width: 160px;
+    background: #fafafa;
+    border-radius:0.5px;
+    outline:darkcyan;
+    font-size: 12px;
+    color:black;
+    padding-left: 6px;
+}
+.edittransAddress {
+    color:#1a1f83;
+    font-weight: 700;
+    padding: 11px;
+}
+
+
+.edittransAddress input{
+    margin-bottom: 5px;
+    padding-right: 10px;
+    font-size: 14px;
+    outline: none;
+    border: 1px solid black;
+    text-align: center;
+    
+}
+.border{
+    border: 10px solid; ;
+    color:black;
+    
+    
+}
+.Adress{
+    border:0.5px solid;
+    margin:right 40px;
+    color:#5157d1;
+}
+
+.upload {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2px;
+    border: solid 1px #67686c;
+    width: 175px;
+    height: 183px;
+    margin-top: 27px;
+    box-shadow: 2px 2px 2px #747493;
+}
+.upload>img{
+    width: 146px;
+    height: 143px;
+    border: 1px solid #4ba8ab;
+    border-radius: 13px;
+    margin: 5px;
+}
+
+.mar{
+    position: relative;
+    margin-top: -15px;
+}
+.pos{
+    position: relative;
+    left: 90px;
+}
+.editAddHome{
+    width: 800px;
+    margin:20px auto;
+    border: 1px solid rgb(234, 230, 230);
+    padding: 30px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.19);
+    background-color: #ffff;
+    border-radius: 6px;
+}
+.moran {
+    position: relative;
+    top: -13x;
+}
+.buttonGrid{
+    position: relative;
+    top: 237px;
+}
+.pincode{
+    width: 104px;
+}

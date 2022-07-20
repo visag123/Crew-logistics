@@ -2,18 +2,18 @@ import React, {  useState } from "react";
 import  "./Login.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useUserAuth } from "../../Context/UserAuthcontext";
+import { useUserAuth } from "../../context/UserAuthcontext";
 import UserDataService from"../../firebase/userservice";
 import logo from "../../assets/landscape-view.jpg"
-import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
+import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState({ error: false, msg: "" });
   const navigate = useNavigate();
-  const { setUserInfo,setIsAuth,isAuth,setCrew } = useUserAuth();
+  const { setUserInfo,setIsAuth,isAuth,setCrew,setTrans } = useUserAuth();
 
   /// Clear notification messages /// 
   const clearMassage = () =>{
@@ -45,6 +45,7 @@ const Login = () => {
                navigate("/admin/crew");
              } else if (newdata.role === "Transport Admin") {
               setUserInfo({initial:true , nameId:username})
+              setTrans(true)
               setIsAuth(!isAuth)
                navigate("/admin/trans");
              } else {

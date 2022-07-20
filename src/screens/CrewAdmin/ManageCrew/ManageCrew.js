@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import "./ManageCrew.css"
 import UserDataService from "../../../firebase/userservice";
 import { useUserAuth } from "../../../Context/UserAuthcontext";
+
 
 
 const ManageCrew = () => {
@@ -10,28 +11,27 @@ const ManageCrew = () => {
     const { getUserId } = useUserAuth();
     const date = new Date().toISOString().slice(0,10)
 
-    useEffect(() => {
-        getTravel();
-    }, []);
-  
   /// Fetch roster datas from the firebase ///
     const getTravel = async () => {
       const data = await UserDataService.getFlightRost();
       setTravel(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
+  const handleAddcrew = (data) => {
+    navigate('/admin/crew/addCrew', { state: data })
+  }
   return (
     <>
       <div className="editpage_search">
-            <form>
-              <button type="submit">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </button>
-              <input type="text" placeholder="search" />
-            </form>
-            <i className="fa-solid fa-circle-plus"></i>
-          </div>
-     <div className="sys-table">
+        <form>
+          <button type="submit">
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <input type="text" placeholder="search" />
+        </form>
+        <i className="fa-solid fa-circle-plus"></i>
+      </div>
+      <div className="sys-table">
         <table>
           <thead>
             <tr>

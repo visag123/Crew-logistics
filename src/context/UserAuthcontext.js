@@ -12,6 +12,7 @@ export function UserAuthContextProvider({ children }) {
   
   const [userInfo,setUserInfo] = useState({initial:false,nameId :''});
   const [crew,setCrew] = useState(false)
+  const [trans,setTrans] = useState(false)
   const [isAuth,setIsAuth] =useState(false)
   const [usersId,setUsersid]=useState('');
   // const [crewId,setCrewId]=useState('');
@@ -45,7 +46,10 @@ export function UserAuthContextProvider({ children }) {
         setUsersid,
         getUserId,
         crew,
-        setCrew
+        setCrew,
+        trans,
+        setTrans
+       
       }}
     >
       {children}

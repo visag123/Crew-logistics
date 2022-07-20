@@ -1,9 +1,9 @@
 import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import  "./EditCrew.css"
-import Input from '../../../components/Input/Input';
+import Input from '../../../components/input/Input';
 import UserDataService from "../../../firebase/userservice";
-import { useUserAuth } from "../../../Context/UserAuthcontext";
+import { useUserAuth } from '../../../context/UserAuthcontext';
 
 
 const EditCrew = () => {

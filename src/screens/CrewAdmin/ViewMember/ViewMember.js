@@ -49,7 +49,7 @@ const ViewMember = () => {
               return (
                 <tr key={doc.id}>
                   <td onClick={() => getUserId(doc.id)}>
-                    <Link to="/admin/crew/editCrew">{doc.userId}</Link>
+                    <Link to="/admin/crew/crewRost">{doc.userId}</Link>
                   </td>
                   <td>{doc.firstname}</td>
                   <td>{doc.gender}</td>

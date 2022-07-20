@@ -21,6 +21,7 @@ const EditCrew = () => {
     city:"",
     state:"",
     pincode:"",
+    
   })
   const navigate =useNavigate();
   const { usersId,setUsersid } = useUserAuth();
@@ -54,7 +55,8 @@ useEffect(() => {
 const submitHandler = async(e) =>{
   e.preventDefault();
   const crew = {
-    firstname,lastname,dob,userId,gender,addtionreq,mobilNo,email,addline1,addline2,city,state,pincode
+    firstname,lastname,dob,userId,gender,addtionreq,mobilNo,email,addline1,addline2,city,state,pincode,
+    assignedFlight:"NA",days:[{date:'',assignflight:''}]
     };
 
   try {
@@ -74,7 +76,7 @@ const submitHandler = async(e) =>{
   setCrewMember({firstname:"",lastname:"",dob:"",userId:"",gender:"",addtionreq:"",mobilNo:"",email:"",
   addline1:"",addline2:"",city:"",state:"",pincode:""})
   navigate('/admin/crew/viewCrew')
-
+ 
 }
 
 const cancelChange =()=>{

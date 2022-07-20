@@ -2,22 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "./ManageCrew.css"
 import UserDataService from "../../../firebase/userservice";
+import { useUserAuth } from "../../../Context/UserAuthcontext";
+
 
 
 const ManageCrew = () => {
-  const [travel, setTravel] = useState([])
-
-
-  const navigate = useNavigate()
-  useEffect(() => {
-    getTravel();
-  }, []);
+    const [travel,setTravel] =useState([])
+    const { getUserId } = useUserAuth();
+    const date = new Date().toISOString().slice(0,10)
 
   /// Fetch roster datas from the firebase ///
-  const getTravel = async () => {
-    const data = await UserDataService.getCrewusers();
-    setTravel(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+    const getTravel = async () => {
+      const data = await UserDataService.getFlightRost();
+      setTravel(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
 
   const handleAddcrew = (data) => {
     navigate('/admin/crew/addCrew', { state: data })
@@ -47,13 +45,10 @@ const ManageCrew = () => {
             {travel.map((doc) => {
               return (
                 <tr key={doc.id}>
-                  <td className='text-info text-decoration-underline'
-                    onClick={() => handleAddcrew(doc)}>
-                    <span role="button" tabIndex="0">{doc.FlightNo}</span>
-                  </td>
-                  <td className='No_of_crew'>{doc.CrewMembers}</td>
-                  <td>{doc.FlightRoute}</td>
-                  <td>{doc.FlightDateTime}</td>
+                  <td onClick={() => getUserId(doc.id)}><Link to='/admin/crew/addCrew'>{doc.FlightNumber}</Link></td>
+                  <td className='No_of_crew'>{doc.CrewMember}</td>
+                  <td>{doc.Origin} - {doc.Destination}</td>
+                  <td>{date} - {doc.Departure}</td>
                 </tr>
               );
             })}

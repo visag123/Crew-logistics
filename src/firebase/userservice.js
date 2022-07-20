@@ -11,9 +11,10 @@ import {
 
 const userCollectionRef = collection(db, "users");
 const adminCollectionRef = collection(db, "acceptUser");
-const crewCollectionRef = collection(db, "roster");
+const flightRosterCollectionRef = collection(db, "roster");
 const crewMemberCollectionRef = collection(db, "crew member");
 const cabDriverCollectionRef = collection(db, "cabdrivers");
+const flightRostCollectionRef = collection(db, "flightRoster");
 class UserDataService {
   addUsers = (newUser) => {
     return addDoc(userCollectionRef, newUser);
@@ -23,6 +24,12 @@ class UserDataService {
   };
   addCrewMember = (crew) => {
     return addDoc(crewMemberCollectionRef, crew);
+  };
+  addFlightData = (flight) => {
+    return addDoc(flightRosterCollectionRef, flight);
+  };
+  addFlightRost = (flightData) => {
+    return addDoc(flightRostCollectionRef, flightData);
   };
   updateUser = (id, updatedUser) => {
     const userDoc = doc(db, "users", id);
@@ -42,8 +49,12 @@ class UserDataService {
     return getDocs(userCollectionRef);
   };
   
-  getCrewusers = ()=>{
-    return getDocs(crewCollectionRef);
+  getFlightRoster = ()=>{
+    return getDocs(flightRosterCollectionRef);
+
+  }
+  getFlightRost = ()=>{
+    return getDocs(flightRostCollectionRef);
 
   }
   getCrewMember = ()=>{
@@ -66,5 +77,9 @@ class UserDataService {
   };
   
   
+  getFlightID = (id) => {
+    const flightDoc = doc(db, "flightRoster", id);
+    return getDoc(flightDoc);
+  };
 }
 export default new UserDataService();

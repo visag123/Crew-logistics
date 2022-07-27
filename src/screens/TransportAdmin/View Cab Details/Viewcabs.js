@@ -1,9 +1,23 @@
-import React from 'react'
 import { Link, useNavigate } from "react-router-dom";
+import UserDataService from "../../../firebase/userservice";
+import React, { useState, useEffect } from 'react';
+
 
 function Viewcabs() {
+const [cabdetails, upadatecabdetails] = useState([]);
+const navigate = useNavigate()
+ 
+   const getcabdetails = async () => {
+    const data = await UserDataService.getcabdetails();
+    if(data){
+      upadatecabdetails(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      // console.log(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+  };
+   useEffect(()=>{
+    getcabdetails();
+   },[])
   
-    const navigate = useNavigate()
   return (
         <>
       <div className="editpage_search">
@@ -21,21 +35,20 @@ function Viewcabs() {
               <th>Registration Number</th>
               <th>Category</th>
               <th>No of seats </th>
-              <th>ASSIGNED Driver</th>
+              <th>Location</th>
+              <th>Assigned Driver</th>
             </tr>
           </thead>
           <tbody>
-          {[].map((doc) => {
+          {cabdetails.map((doc) => {
               return (
                 <tr key={doc.id}>
-                <td className='text-info text-decoration-underline'
-                 >
-                  <span role="button" tabIndex="0">{doc.DriverName}</span></td>
-                <td className='No_of_crew'>{doc.UserId}</td>
+
                   <td>{doc.RegistrationNumber}</td>
                   <td>{doc.Category}</td>
                   <td>{doc.NoOfSeats}</td>
-                  <td>{doc.AssignedCabs}</td>
+                  <td>{doc.Location}</td>
+                  <td>{doc.AssignedDriver}</td>
                 </tr>
               );
             })}

@@ -14,6 +14,7 @@ const adminCollectionRef = collection(db, "acceptUser");
 const flightRosterCollectionRef = collection(db, "roster");
 const crewMemberCollectionRef = collection(db, "crew member");
 const cabDriverCollectionRef = collection(db, "cabdrivers");
+const cabDetailsCollectionRef = collection(db,"cabdetails")
 const flightRostCollectionRef = collection(db, "flightRoster");
 class UserDataService {
   addUsers = (newUser) => {
@@ -72,10 +73,20 @@ class UserDataService {
   addDriver =(driver)=>{
     return addDoc(cabDriverCollectionRef, driver);
   }
+  updateDriver = (id, updatedDriver) => {
+    const userDoc = doc(db, "cabdrivers", id);
+    return updateDoc(userDoc, updatedDriver);
+  };
   getDrivers = () => {
     return getDocs(cabDriverCollectionRef);
   };
-  
+  getDriver = (id) => {
+    const driverDoc = doc(db, "cabdrivers", id);
+    return getDoc(driverDoc);
+  };
+  getcabdetails = () => {
+    return getDocs(cabDetailsCollectionRef);
+  };
   
   getFlightID = (id) => {
     const flightDoc = doc(db, "flightRoster", id);

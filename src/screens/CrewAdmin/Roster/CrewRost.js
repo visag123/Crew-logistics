@@ -5,21 +5,20 @@ import './CrewRost.css';
 import { useUserAuth } from "../../../context/UserAuthcontext";
 import UserDataService from "../../../firebase/userservice";
 
-
-
-
 export const CrewRost = () => {
 
   const [todo,setTodo] = useState([]);
   const [flightData,setFlightData] = useState([]);
   const { usersId,setUsersid } = useUserAuth();
   const date = new Date().toISOString().slice(0,10)
+  const [today,setDate] =useState(date);
+  // const [flag,setDate] =useState(date);
 
   /// Get user details for edit ///
      const editHandler = async () => {
           try {
-            const docSnap = await UserDataService.getCrew(usersId);
-            console.log("the record is :", docSnap.data());
+            const docSnap = await UserDataService.getAssignCrewID(usersId);
+            // console.log("the record is :", docSnap.data());
             const doc = docSnap.data();
             setTodo(doc);  
             console.log(doc);
@@ -32,7 +31,6 @@ export const CrewRost = () => {
           if (usersId !== undefined && usersId !== "") {
             editHandler();
           }
-          console.log('error');
         }, [usersId]);
 
         useEffect(() => {
@@ -41,24 +39,40 @@ export const CrewRost = () => {
       
         /// Fetch roster datas from the firebase ///
         const getFlightroster = async () => {
-          const data = await UserDataService. getFlightRost();
+          const data = await UserDataService. getAssignFlight();
           setFlightData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };    
-      //  console.log(flightData);
-
+        const onDateChange =(e)=>{
+          setDate(e.target.value)
+        }
+      
   return (
     <>
-    { flightData.filter((doc) => {
-                if (todo.assignedFlight === doc.FlightNumber && todo.date === date) {
+    <div className="filterDate">
+              <li>Select Date</li>
+              <input type="date" value={today} onChange={onDateChange} />
+            </div>
+            
+
+    {  flightData.filter((doc) => {
+       
+          if (todo.userId === doc.crewMemberId  ) {
                   return doc;
                 } 
+                else if(todo.userId === doc.crewMemberId && today === doc.date ){
+                  return doc;
+                }             
               })
             .map((doc)=>{
+              function parseTime(s) {
+                var c = s.split(':');
+                return parseInt(c[0]) * 60 + parseInt(c[1]);  
+             }
               return (
-                <div className='crewRoster_wrapper'>
+                <div className='crewRoster_wrapper' key={doc.id}>
                 <div className='crewRost_head'>
-                    <div><i className="fa-solid fa-calendar-days"></i>&nbsp; <b> {todo.date} </b></div>
-                    <div> <p><small>Pickup from Hotel</small> @ {todo.date}  </p></div>
+                    <div><i className="fa-solid fa-calendar-days"></i>&nbsp; <b> {doc.date} </b></div>
+                    <div> <p><small>Pickup from Hotel</small> @ {}</p></div>
                 </div>
                 <div className='crewRost_content'>
                    <div>
@@ -67,7 +81,7 @@ export const CrewRost = () => {
                    </div>
                   <div className='crew_center'>
                     <div className='crew_flight'>
-                    <small>{doc.FlightNumber}  </small>
+                    <small>{doc.assignflightNo}  </small>
                     </div>
                     <div className='crewRost_BS'>
                    <BsCircle size=".7em" />
@@ -77,7 +91,7 @@ export const CrewRost = () => {
                    <BsCircle size=".7em" />
                    </div>
                    <div className='crew_flight'>
-                     <small>{doc.Duration} hrs <br /> <font className='duration'>Duration</font>  </small>
+                     <small>{parseTime(doc.Arrival) - parseTime(doc.Departure)} mins <br /> <font className='duration'>Duration</font>  </small>
                    </div>
                   </div>
                    <div> 
@@ -86,14 +100,11 @@ export const CrewRost = () => {
                        </div>
                 </div>
                 <div className='crewRost_fooder'>
-                  <p><small>Pickup from Airport</small> @  {todo.date}</p>
+                  <p><small>Pickup from Airport</small> @  {}</p>
                 </div>
              </div>
               )
-            })}
-
-     
- 
+            })} 
     </>
   )
 }

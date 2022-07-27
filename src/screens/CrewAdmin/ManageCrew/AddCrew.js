@@ -1,33 +1,42 @@
 import React, { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import UserDataService from "../../../firebase/userservice";
-import Input from "../../../components/input/Input";
-import { useUserAuth } from "../../../context/UserAuthcontext";
-import Button from "../../../components/button/Button";
+import Input from "../../../components/Input/Input";
+import { useUserAuth } from "../../../Context/UserAuthcontext";
+import Button from "../../../components/Button/Button";
 
 const AddCrew = () => {
   const [assignMember, setAssignMember] = useState([]);
+  const [assignCrewMember, setAssignCrewMember] = useState([]);
+  const [getFlightDetail,setGetFlightDetail] = useState('');
   const [getFlightNo,setGetFlightNo] = useState('');
+  const [getFlightOrigin,setGetFlightOrigin] = useState('');
+  const [getNoOfCrew,setgetNoOfCrew] = useState(0);
+  const [getMaxCrew,setgetMaxCrew] = useState(0);
   const [getCrewMemId,setGetCrewMemId] = useState([]);
   const [crewMember,setCrewMember] = useState([])
   const [checkbox,setCheckbox] = useState(false);
   const { usersId,setUsersid } = useUserAuth();
   const date = new Date().toISOString().slice(0,10)
   const [todayDate,setTodayDate] = useState(date)
-  const [sample,setSample] = useState([])
-
   const navigate = useNavigate();
   
   const editHandler = async () => {
     try {
     const docSnap = await UserDataService.getFlightID(usersId);
       // console.log("the record is :", docSnap.data());
+      setGetFlightDetail(docSnap.data());
       setGetFlightNo(docSnap.data().FlightNumber);
-    
+      setGetFlightOrigin(docSnap.data().Origin);
+      setgetNoOfCrew(docSnap.data().NoOfCrew +1)
+      setgetMaxCrew(docSnap.data().CrewMember)
+
     } catch (err) {
         console.log(err);
     }
   };
+
+// console.log(getFlightDetail);
 
   useEffect(() => {
     if (usersId !== undefined && usersId !== "") {
@@ -35,32 +44,6 @@ const AddCrew = () => {
     }
   }, [usersId]);
 
-  const [selectedCrew, updateSelectedCrew] = useState([]);
-
-  // const navigate = useNavigate();
-  // const location = useLocation();
-
-  
-  // const selectedCrew = (doc) => {
-    
-  //   // updateSelectedCrew(selectedCrew =>
-  //   //   selectedCrew.map(obj=>{
-  //   //     if(obj.userId === doc.map(id=>id.userId)){
-  //   //       return {...obj};
-  //   //     }
-  //   //     return {...obj,doc};
-  //   //   })
-  //   //   );
-  // }
-  const saveCrewMembers = () => {
-    console.log(selectedCrew);
-  }
-  const handleDate = (e) => {
-    console.log(e.target.value)
-  }
-  const handleClose = () => {
-    navigate('/admin/crew/manageCrew');
-  }
   useEffect(() => {
 
     getCrewMember();
@@ -68,28 +51,26 @@ const AddCrew = () => {
 
   /// Fetch roster datas from the firebase ///
   const getCrewMember = async () => {
-    const data = await UserDataService.getCrewMember();
+    const data = await UserDataService.getAssignCrews();
     setAssignMember(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
-
   const clearUser =()=>{
     setUsersid("")
-    navigate('/admin/crew/manageCrew')
+    navigate('/admin/crew/roster')
   }
 
   const getCrewMemberId =(id)=>{
     setGetCrewMemId(id)
     console.log(id);
-    console.log(checkbox);
+    // console.log(checkbox);
   }
 
   const crewHandler = async () => {
     try {
-    const docSnap = await UserDataService.getCrew(getCrewMemId);
+    const docSnap = await UserDataService.getAssignCrewID(getCrewMemId);
       console.log("the record is :", docSnap.data());
       setCrewMember(docSnap.data());
-      setSample(docSnap.data())
     
     } catch (err) {
         console.log(err);
@@ -100,78 +81,90 @@ const AddCrew = () => {
       crewHandler();
     }
   }, [getCrewMemId]);
+ 
+  let newArray =[]
+ 
+    assignMember.filter((doc)=>{
+     
+      let i = 0;
+      for( i ;i<doc.days.length; i++ ){
 
-  { 
-    const ere =  assignMember.map((doc)=>{
-      if (doc.days === undefined ) {
-        return doc.days
-      }
-      console.log(doc.days[0].date);
+        if (doc.days[i].date === todayDate){
+          return doc;
+        }
+      } 
+        return newArray.push(doc);      
     })
-    console.log(ere);
-
-  }
 
 const updateFlightNo = async () =>{
-      // const assignedFlightNo ={
-      //   assignedFlight:getFlightNo,
-      //   date:todayDate
-      // }
 
-      const days=
-        {assignflight:getFlightNo,
-          date:todayDate}
+  setgetNoOfCrew(getNoOfCrew+1)
+         const addcrew ={
+          NoOfCrew:getNoOfCrew
+         }
+
+         const addflight= {
+           assignflight:getFlightNo,
+           date:todayDate
+          }
+   
+      { checkbox && crewMember.days.push(addflight);
+       console.log(crewMember); 
+      }    
+        
+      const assignCrew=
+        {assignflightNo:getFlightNo,
+          date:todayDate,
+          crewMemberId:crewMember.userId,
+          crewMemberName:crewMember.firstname,
+          Origin:getFlightDetail.Origin,
+          Destination:getFlightDetail.Destination,
+          Departure:getFlightDetail.Departure,
+          Arrival:getFlightDetail.Arrival,
+        }        
+  try {
+    if (getNoOfCrew < getFlightDetail.CrewMember+1 && checkbox === true) {
+   
+      await UserDataService.addAssignFlight(assignCrew);
+      setCrewMember((crewMember.location = getFlightDetail.Destination));
+      await UserDataService.updateAssignCrew(getCrewMemId, crewMember);
+      getCrewMember();
+      await UserDataService.updateFlightRoster(usersId, addcrew);
+    }
   
-      sample.days.push(days);
-      console.log(sample);
-      
-      // console.log(assignMember);
+  } catch (err) {
+    console.log(err);
+  }
 
-      
-//   try {
-//     if (getCrewMemId !== undefined && checkbox === true) {
-//       await UserDataService.updateCrew(getCrewMemId, sample);
-//       console.log('change flight no');
-//       getCrewMember();
-//       setCheckbox(false)
-//   }
-
-// }catch(err){
-//   console.log(err)
-// }
 }
-
   return (
     <>
-      
-     <div className="sys-table">
-     <div className="addCrewHeader">
-         <div>
-           <Input 
-           type="text"
-           label="Flight No"
-           value={getFlightNo}
-           />
-         </div>
-         <div>
-           <Input 
-           type="date"
-           label="Date"
-           value={todayDate}
-           onChange={(e)=>setTodayDate(e.target.value)}
-           />
-         </div>
-         <div>
-           <Button onClick={updateFlightNo}>Save </Button>
-         </div>
-         <div>
-         <Button onClick={clearUser}>Cancel</Button>
-         </div>
-      </div>
+      <div className="sys-table">
+        <div className="addCrewHeader">
+          <div>
+            <Input type="text" label="Flight No" value={getFlightNo} onChange={(e) => setGetFlightNo(e.target.value)}/>
+          </div>
+          <div>
+            <Input
+              type="date"
+              label="Date"
+              value={todayDate}
+              onChange={(e) => setTodayDate(e.target.value)}
+            />
+          </div>
+          <div>
+            <Button onClick={updateFlightNo}>Save </Button>
+          </div>
+          <div>
+            <Button onClick={clearUser}>Cancel</Button>
+          </div>
+        </div>
         <table>
           <thead>
             <tr>
-              <th><input type="checkbox" /></th>
+              <th>
+                <input type="checkbox" />
+              </th>
               <th>User ID</th>
               <th>Employee Name</th>
               <th>Gender</th>
@@ -179,10 +172,10 @@ const updateFlightNo = async () =>{
             </tr>
           </thead>
           <tbody>
-            {assignMember.filter((doc) => {
-                if ( doc.date !== todayDate ) {
-                  return doc;
-                } 
+            {newArray.filter((doc) => {
+                   if (doc.location === getFlightOrigin ){
+                      return  doc;
+                   }                 
               })
             .map((doc) => {
               return (
@@ -191,15 +184,18 @@ const updateFlightNo = async () =>{
                   <td>{doc.userId}</td>
                   <td className='No_of_crew'>{doc.firstname}</td>
                   <td>{doc.gender}</td>
-                  <td>{doc.addtionreq}</td>
+                  <td >{doc.addtionreq}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>
+    
+        
+       
       </div>
     </>
-  )
+  );
 }
 
 

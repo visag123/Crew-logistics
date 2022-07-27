@@ -33,16 +33,16 @@
     /* padding: 1px; */
 }
 .editpage_edit{
-    width: 95%;
-    margin: auto;
+    width: 100%;
+    /* margin: auto; */
 }
 .edit{
     width: 700px;
     margin:20px auto;
-    border: 1px solid rgb(234, 230, 230);
+    /* border: 1px solid rgb(234, 230, 230); */
     padding: 30px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.19);
-    background-color: #ffff;
+    /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.19); */
+    /* background-color: #ffff; */
     border-radius: 6px;
 
 }
@@ -88,6 +88,7 @@
     width: 260px;
     font-size: 15px;
     border: none;
+    background: none;
     outline: none;
     margin:10px 0px 25px 0px;
     border-bottom: 1px solid #004387;
@@ -99,12 +100,14 @@
     margin:10px 0px 25px 0px;
     border: none;
     outline: none;
+    background: none;
     border-bottom: 1px solid #004387;
     
 }
 .editUser_input{
     display: flex;
     flex-direction: column;
+    background: none;
     
 }
 .edit label{

@@ -1,0 +1,28 @@
+{
+    "DefaultCrewData":[
+        {"title":"Flight No",
+        "FlightNo":"Flight No"},
+    
+        {"title":"Origin",
+        "Origin":"Origin"},
+    
+        {"title":"Destination",
+         "Destination":"Destination"},
+    
+        {"title":"Date",
+         "Date":"Date"},
+    
+        {"title":"Departure Time",
+         "DepartureTime":"Departure Time"},
+    
+        {"title":"Arrival Time",
+         "ArrivalTime":"Arrival Time"},
+         {"title":"Max crew",
+            "Max crew":"Max crew"},
+
+         {"title":"Crew Assigned",
+        "Crew Assigned":"Crew Assigned"}
+               
+    ]
+    
+}

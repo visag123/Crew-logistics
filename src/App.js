@@ -19,9 +19,7 @@ import AddCrew from "./screens/CrewAdmin/ManageCrew/AddCrew";
 import ManageDrivers from "./screens/TransportAdmin/Manage Drivers/ManageDrivers";
 import AddDrivers from "./screens/TransportAdmin/Manage Drivers/Add Drivers";
 import Viewcabs from "./screens/TransportAdmin/View Cab Details/Viewcabs";
-import CrewRoster from "./screens/CrewAdmin/Roster/CrewRoster";
 import { CrewRost } from "./screens/CrewAdmin/Roster/CrewRost";
-import  ViewCrewRoster  from "./screens/CrewAdmin/Roster/ViewCrewRoster";
 
 
 function App() {
@@ -34,7 +32,7 @@ function App() {
             <Route path="/sidebar" element={<Sidebar />}/>
             <Route path="/reset" element={<Resetpassword />}/>
             <Route path="/signup" element={<Signup />}/>
-            <Route path="/admin" element={<ProtectedRoute><SysAdminpage/></ProtectedRoute>}>           
+            <Route path="/admin" element={<SysAdminpage/>}>           
             <Route path="edit" element={<Editpage/>}/>
             <Route path="users" element={<Userlist />}/>
             <Route path="trans" element={<TransportAdmin />}>
@@ -48,9 +46,7 @@ function App() {
             <Route path="viewCrew" element={<ViewMember/>}/>
             <Route path="editCrew" element={<EditCrew/>}/>
             <Route path="addCrew" element={<AddCrew/>}/>
-            <Route path="crewRoster" element={<CrewRoster/>}/>
             <Route path="crewRost" element={<CrewRost/>}/>
-            <Route path="viewcrewRost" element={<ViewCrewRoster/>}/>
             </Route>
             </Route>
           </Routes>

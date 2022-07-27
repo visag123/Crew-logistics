@@ -41,6 +41,7 @@
 }
 .crewRost_content h5{
     display:flex;
+    width: 130px;
     flex-direction: column;
     justify-content: center;
     padding: 20px 2px 10px 2px;

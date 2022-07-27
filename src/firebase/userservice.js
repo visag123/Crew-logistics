@@ -16,6 +16,8 @@ const crewMemberCollectionRef = collection(db, "crew member");
 const cabDriverCollectionRef = collection(db, "cabdrivers");
 const cabDetailsCollectionRef = collection(db,"cabdetails")
 const flightRostCollectionRef = collection(db, "flightRoster");
+const assignflightCollectionRef = collection(db, "assignFlight");
+const assignCrewCollectionRef = collection(db, "assignCrew");
 class UserDataService {
   addUsers = (newUser) => {
     return addDoc(userCollectionRef, newUser);
@@ -32,12 +34,27 @@ class UserDataService {
   addFlightRost = (flightData) => {
     return addDoc(flightRostCollectionRef, flightData);
   };
+  addAssignFlight = (assign) => {
+    return addDoc(assignflightCollectionRef, assign);
+  };
+  addAssignCrew = (assignCrew) => {
+    return addDoc(assignCrewCollectionRef, assignCrew);
+  };
+  
   updateUser = (id, updatedUser) => {
     const userDoc = doc(db, "users", id);
     return updateDoc(userDoc, updatedUser);
   };
   updateCrew = (id, updatedCrew) => {
     const crewDoc = doc(db, "crew member", id);
+    return updateDoc(crewDoc, updatedCrew);
+  };
+  updateFlightRoster = (id, updatedFlight) => {
+    const crewDoc = doc(db, "flightRoster", id);
+    return updateDoc(crewDoc, updatedFlight);
+  };
+  updateAssignCrew = (id, updatedCrew) => {
+    const crewDoc = doc(db, "assignCrew", id);
     return updateDoc(crewDoc, updatedCrew);
   };
 
@@ -58,10 +75,19 @@ class UserDataService {
     return getDocs(flightRostCollectionRef);
 
   }
+  getAssignFlight = ()=>{
+    return getDocs(assignflightCollectionRef);
+
+  }
   getCrewMember = ()=>{
     return getDocs(crewMemberCollectionRef);
 
   }
+  getAssignCrews = ()=>{
+    return getDocs(assignCrewCollectionRef);
+
+  }
+ 
   getUser = (id) => {
     const userDoc = doc(db, "users", id);
     return getDoc(userDoc);
@@ -91,6 +117,10 @@ class UserDataService {
   getFlightID = (id) => {
     const flightDoc = doc(db, "flightRoster", id);
     return getDoc(flightDoc);
+  };
+  getAssignCrewID = (id) => {
+    const AssignCrew = doc(db, "assignCrew", id);
+    return getDoc(AssignCrew);
   };
 }
 export default new UserDataService();

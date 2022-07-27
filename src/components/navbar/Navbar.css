@@ -31,18 +31,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 6px;
+    /* margin-top: 6px; */
+    /* background: #991265; */
+    height: 100%;
    
 
   }
   .navlink li{
-    margin: 1px 10px;
+    margin: 0px 10px;
     list-style-type: none;
     padding: 10px;
     cursor: pointer;
     color: #252D37;
     font-weight: 400;
     font-size: 120%;
+  }
+  .userProfile {
+    display: flex;
+
   }
   .navlink li i {
     text-decoration: none;
@@ -59,7 +65,13 @@
   }
   .navlink small{
     position: relative;
-    top: -2px;
+    font-size: 12px;
+    font-weight: bolder;
+    top: 7px;
     margin-left: 5px;
     color: #991265
+  }
+  .navlink span{
+    position: relative;
+    left: -15px;
   }

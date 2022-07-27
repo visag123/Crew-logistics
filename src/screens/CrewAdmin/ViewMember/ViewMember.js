@@ -14,7 +14,7 @@ const ViewMember = () => {
 
   /// Fetch roster datas from the firebase ///
   const getCrewMember = async () => {
-    const data = await UserDataService.getCrewMember();
+    const data = await UserDataService.getAssignCrews();
     setCrewMember(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   const addCrewMember = () => {
@@ -40,22 +40,23 @@ const ViewMember = () => {
               <th>Employee Name</th>
               <th>Gender</th>
               <th>Contact NO</th>
-              <th>Mail ID</th>
-              <th>ASSIGNED Flight No</th>
+              <th >Mail ID</th>
+              <th>View Roster</th>
             </tr>
           </thead>
           <tbody>
             {crewMember.map((doc) => {
               return (
                 <tr key={doc.id}>
-                  <td onClick={() => getUserId(doc.id)}>
-                    <Link to="/admin/crew/crewRost">{doc.userId}</Link>
-                  </td>
+                  <td >{doc.userId}</td>
                   <td>{doc.firstname}</td>
                   <td>{doc.gender}</td>
                   <td>{doc.mobilNo}</td>
                   <td>{doc.email}</td>
-                  <td className='Num_crew'>{doc.assignedFlight}</td>
+                  <td className="viewRost" onClick={() => getUserId(doc.id)}>
+                    <Link to="/admin/crew/crewRost"><button>View Roster</button></Link>
+                  </td>
+                 
                 </tr>
               );
             })}

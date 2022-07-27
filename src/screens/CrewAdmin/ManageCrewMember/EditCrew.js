@@ -32,6 +32,7 @@ const handlechange =(e) =>{
     let {name,value} = e.target;
     setCrewMember ({...crewMember,[name]:value})
 }
+console.log(usersId);
 const editHandler = async () => {
   try {
   const docSnap = await UserDataService.getCrew(usersId);
@@ -56,18 +57,23 @@ const submitHandler = async(e) =>{
   e.preventDefault();
   const crew = {
     firstname,lastname,dob,userId,gender,addtionreq,mobilNo,email,addline1,addline2,city,state,pincode,
-    assignedFlight:"NA",days:[{date:'',assignflight:''}]
     };
+    const assignCrew = {
+      firstname,userId,gender,addtionreq,mobilNo,email,location:city,
+      days:[{date:'',assignflight:''}]
+      };
 
   try {
     if (usersId !== undefined && usersId !== "") {
       await UserDataService.updateCrew(usersId, crew);
       setUsersid("");
       navigate('/admin/crew/viewCrew')
+      console.log(crewMember);
   }
     else{
       await UserDataService.addCrewMember(crew)
-      navigate('') 
+      await UserDataService.addAssignCrew(assignCrew)
+      console.log(crewMember);
     }
        
   }catch(err){
@@ -75,6 +81,7 @@ const submitHandler = async(e) =>{
   }
   setCrewMember({firstname:"",lastname:"",dob:"",userId:"",gender:"",addtionreq:"",mobilNo:"",email:"",
   addline1:"",addline2:"",city:"",state:"",pincode:""})
+  setUsersid("");
   navigate('/admin/crew/viewCrew')
  
 }

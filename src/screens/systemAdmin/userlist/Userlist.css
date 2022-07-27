@@ -108,11 +108,11 @@
     font-size: 130%;
 }
 .sys-table{
-    margin:10px auto;
-    width: 95%;
+    margin:5px auto;
+    width: 99%;
     padding: 20px;
     background: #fffefe;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); */
     height: auto;
     border-radius: 5px;
 }
@@ -136,7 +136,7 @@ tbody td{
     font-size: 15px;
 }
 tbody td:last-child{
-    text-align: center;
+    text-align: start;
 
 }
 .sys-table button{

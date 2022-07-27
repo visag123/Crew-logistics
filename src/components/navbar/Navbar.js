@@ -4,7 +4,7 @@ import { useUserAuth } from "../../Context/UserAuthcontext";
 
 
 const Navbar = () => {
-  const { userInfo } = useUserAuth();
+  const { userInfo,crew } = useUserAuth();
 
   return (
    <>
@@ -21,10 +21,11 @@ const Navbar = () => {
         <li>
           <i className="fa-solid fa-gear" />
         </li>
-        <li>
+        <li className='userProfile'>
           <i className="fa-solid fa-circle-user" />
           <small>
-            {userInfo.nameId}
+            {userInfo.nameId} <br />
+            <span>{crew ? "Crew Admin":"System Admin"}</span>
           </small>
         </li>
       </ul>

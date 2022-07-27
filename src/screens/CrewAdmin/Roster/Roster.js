@@ -1,5 +1,8 @@
 import React, { useState, useEffect,useRef } from "react";
 import UserDataService from "../../../firebase/userservice";
+import Default from "../../Default.json";
+import { Link } from 'react-router-dom';
+import { useUserAuth } from "../../../Context/UserAuthcontext";
 // import * as XLSX from 'xlsx'
 import "./Roster.css";
 
@@ -7,15 +10,17 @@ const Roster = () => {
   const [roster, setRoster] = useState([]);
   const [flightRoster, setFlightRoster] = useState([]);
   const [error,setError] = useState(false);
-  const [today,setDate] =useState('');
+  const date = new Date().toISOString().slice(0,10)
+  const [today,setDate] =useState(date);
   const [searchUsers, setSearchUsers] = useState("");
   const [departure,setDeparture] =useState('')
   const [arrival,setArrival] =useState('')
   const [from,setFrom] =useState('')
   const [to,setTo] =useState('')
   const searchinput = useRef();
+  const { getUserId } = useUserAuth();
+
   // const [fetchFlight,setFetchFlight] = useState([])
-  const date = new Date().toISOString().slice(0,10)
    
   useEffect(() => {
     getRoster();
@@ -57,7 +62,7 @@ const Roster = () => {
 
   const resetSearch = () => {
     setError(false)
-    setDate('')
+    setDate(date)
   }
 
 //   const chooseFile =async (e) =>{
@@ -94,6 +99,16 @@ const Roster = () => {
 //      }
 //    });
 //  }
+let value = Default.DefaultCrewData
+let [FlightNo,Origin,Destination,CrewMembers]=value
+
+const TableTitle=(data)=>{
+  return data.map((doc)=>{
+    return(
+      <th>{doc.title}</th>
+    )
+  })
+}
 
   return (
     <>
@@ -113,26 +128,26 @@ const Roster = () => {
               onChange={searchHandler}
             />
             </div>
-          
+            
           </div>
           <div className="rosterFilter">
-            {/* <div className="filterDate">
+            <div className="filterDate">
               <li>Select Date</li>
               <input type="date" value={today} onChange={onDateChange} />
-            </div> */}
+            </div>
            <div className="filterFlight">
               <form onSubmit={routeHandler}>
                 <li>Flight Route</li>
                 <input
                   type="text"
-                  placeholder="From"
+                  placeholder={Origin.Origin}
                   value={departure}
                   required
                   onChange={(e) => setDeparture(e.target.value)}
                 />
                 <input
                   type="text"
-                  placeholder="To"
+                  placeholder={Destination.Destination}
                   value={arrival}
                   required
                   onChange={(e) => setArrival(e.target.value)}
@@ -147,13 +162,7 @@ const Roster = () => {
         <table className="rosterTable">
           <thead>
             <tr>
-              <th>Flight No</th>
-              <th>Departure</th>
-              <th>Arrival</th>
-              <th>Crew Members</th>
-              <th>Date</th>
-              <th>Departure Time</th>
-              <th>Arrival Time</th>
+              {TableTitle (value)}
             </tr>
           </thead>
           <tbody>
@@ -178,10 +187,13 @@ const Roster = () => {
                     <td className="flightNo">{doc.FlightNumber}</td>
                     <td>{doc.Origin}</td>
                     <td>{doc.Destination}</td>
-                    <td className="Num_crew">{doc.CrewMember}</td>
-                    <td>{date}</td>
+                    {/* <td className="Num_crew">{doc.CrewMember}</td> */}
+                    <td>{today}</td>
                     <td className="Num_crew">{doc.Departure}</td>
                     <td>{doc.Arrival}</td>
+                    <td className="Num_crew">{doc.CrewMember}</td>
+                    <td className="crewAssign"><span>{doc.NoOfCrew}</span>
+                    <button onClick={() => getUserId(doc.id)}><Link to='/admin/crew/addCrew'><i className="fa-solid fa-pen-to-square"></i></Link></button></td>
                   </tr>
                 );
               })}

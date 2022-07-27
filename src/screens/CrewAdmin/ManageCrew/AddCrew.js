@@ -4,8 +4,6 @@ import UserDataService from "../../../firebase/userservice";
 import Input from "../../../components/Input/Input";
 import { useUserAuth } from "../../../Context/UserAuthcontext";
 import Button from "../../../components/Button/Button";
-import { db } from "../../../firebase/firebasecon";
-import { collection, getDocs ,getDoc,addDoc,updateDoc,deleteDoc,doc, setDoc } from 'firebase/firestore'
 
 const AddCrew = () => {
   const [assignMember, setAssignMember] = useState([]);
@@ -21,8 +19,6 @@ const AddCrew = () => {
   const { usersId,setUsersid } = useUserAuth();
   const date = new Date().toISOString().slice(0,10)
   const [todayDate,setTodayDate] = useState(date)
-  const [sample,setSample] = useState([])
-
   const navigate = useNavigate();
   
   const editHandler = async () => {
@@ -49,6 +45,7 @@ const AddCrew = () => {
   }, [usersId]);
 
   useEffect(() => {
+
     getCrewMember();
   }, []);
 
@@ -74,7 +71,6 @@ const AddCrew = () => {
     const docSnap = await UserDataService.getAssignCrewID(getCrewMemId);
       console.log("the record is :", docSnap.data());
       setCrewMember(docSnap.data());
-      setSample(docSnap.data())
     
     } catch (err) {
         console.log(err);
@@ -99,45 +95,6 @@ const AddCrew = () => {
       } 
         return newArray.push(doc);      
     })
-//  console.log(newArray)
-
-// {assignMember.filter((doc)=>{    
-//   let i = 0;
-//   for( i ;i<doc.days.length; i++ ){
-//     // console.log(i);
-//     let currentDate = new Date();
-//       let prevedate = new Date(doc.days[i].date)
-//     if (currentDate.getTime() > prevedate.getTime() ){
-//       // console.log(currentDate.getTime());
-//       // console.log(prevedate.getTime());
-//         delete doc.days[i].date
-//         delete doc.days
-//         console.log(assignMember);
-//       return doc;
-//     }
-//   } 
-//    return console.log(doc.firstname)
-// })
-// }
-  
-
-  // { 
-  //  assignMember.map((doc)=>{
-  //     let [{date,assignFlight}] = doc.days
-  //     // console.log(date);
-      
-  //       //  doc.days.map((docs)=>{
-  //       //   var ida  = docs.date;
-  //       //   // console.log(ida)
-  //       //   if(ida !== todayDate){
-  //       //       return  docs.date;;
-  //       //   }
-  //       //  console.log(doc.firstname);
-  //       // })        
-      
-  //     // console.log("The selected day details",doc.days);
-  //   })
-  // } 
 
 const updateFlightNo = async () =>{
 

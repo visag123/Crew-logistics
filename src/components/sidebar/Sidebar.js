@@ -22,7 +22,7 @@ const Sidebar = () => {
             <h6>{crew ? "Crew Admin":(trans?"Transport Admin":"System Admin")}</h6>
             <Link to={ crew ?"crew/manageCrew":(trans?"trans/manageDrivers":"users")}>
               {crew? (<li>Manage Crew</li> ):(
-                trans?(<li>ManageDrivers</li>):
+                trans?(<li>Manage Drivers</li>):
                 (<li>
                   <i className="fa-solid fa-id-card"/> Users
                   </li>)
@@ -42,7 +42,7 @@ const Sidebar = () => {
             <Link to="crew/roster">
               
              {crew && <li>
-                View Roster
+              Flight Schedule
               </li>}
             </Link>
             

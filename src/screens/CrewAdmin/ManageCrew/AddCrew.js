@@ -1,9 +1,9 @@
 import React, { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import UserDataService from "../../../firebase/userservice";
-import Input from "../../../components/Input/Input";
-import { useUserAuth } from "../../../Context/UserAuthcontext";
-import Button from "../../../components/Button/Button";
+import Input from "../../../components/input/Input";
+import { useUserAuth } from "../../../context/UserAuthcontext";
+import Button from "../../../components/button/Button";
 
 const AddCrew = () => {
   const [assignMember, setAssignMember] = useState([]);
@@ -37,8 +37,8 @@ const AddCrew = () => {
 
   const [selectedCrew, updateSelectedCrew] = useState([]);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
   
   // const selectedCrew = (doc) => {

@@ -19,7 +19,7 @@ export function UserAuthContextProvider({ children }) {
 
   const getUserId=(id)=>{
         setUsersid(id);
-        console.log(id);
+       // console.log(id);
   }
 
   function logIn(email, password) {

@@ -1,10 +1,10 @@
 import React from 'react';
 import "./Navbar.css"
-import { useUserAuth } from "../../context/UserAuthcontext";
+import { useUserAuth } from "../../Context/UserAuthcontext";
 
 
 const Navbar = () => {
-  const { userInfo,crew } = useUserAuth();
+  const { userInfo,crew,trans } = useUserAuth();
 
   return (
    <>
@@ -13,7 +13,6 @@ const Navbar = () => {
         <i className="fa-solid fa-plane-departure"></i>
         &nbsp;&nbsp; CREW <font>Logistics</font>
       </h2>
-
       <ul className="navlink">
         <li>
           <i className="fa-solid fa-bell" />
@@ -25,7 +24,7 @@ const Navbar = () => {
           <i className="fa-solid fa-circle-user" />
           <small>
             {userInfo.nameId} <br />
-            <span>{crew ? "Crew Admin":"System Admin"}</span>
+            <span>{crew ? "Crew Admin":(trans?"Transport Admin":"System Admin")}</span>
           </small>
         </li>
       </ul>

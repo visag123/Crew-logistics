@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import UserDataService from "../../firebase/userservice";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/landscape-view.jpg"
-import Input from "../../components/input/Input";
+import Input from "../../components/Input/Input";
 
 const Signup = () => {
   const [firstname, setFirstname] = useState('');

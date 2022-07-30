@@ -7,12 +7,18 @@
     position: relative;
     padding-left:25px; 
 }
+.crewAssign button{
+border: none;
+background: none;
+
+}
 .viewRost button{
     background: #0e88bd;
     padding: 5px 10px;
     font-size: x-small;
     color: white;
     border-radius: 10px;
+    border: none;
 }
 .rosterTable{
     background-color: rgb(234, 244, 244);

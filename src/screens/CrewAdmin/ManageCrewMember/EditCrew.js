@@ -1,58 +1,43 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect ,useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import  "./EditCrew.css"
-import Input from '../../../components/input/Input';
+import Input from '../../../components/Input/Input';
 import UserDataService from "../../../firebase/userservice";
-import { useUserAuth } from '../../../context/UserAuthcontext';
-
 
 const EditCrew = () => {
-  const [crewMember,setCrewMember] = useState({
-    firstname:'',
-    lastname:'',
-    dob:'',
-    userId:'',
-    gender:'',
-    addtionreq:'',
-    mobilNo:"",
-    email:"",
-    addline1:"",
-    addline2:"",
-    city:"",
-    state:"",
-    pincode:"",
-    
-  })
+const [firstname,setFirstname] = useState('');
+const [lastname,setLastname] = useState('');
+const [dob,setDob] = useState('');
+const [userId,setUserId] = useState('');
+const [gender,setGender] = useState('');
+const [addtionreq,setAddtionreq] = useState('');
+const [mobilNo,setMobilNo] = useState('');
+const [email,setEmail] = useState('');
+const [addline1,setAddline1] = useState('');
+const [addline2,setAddline2] = useState('');
+const [city,setCity] = useState('');
+const [state,setState] = useState('');
+const [pincode,setPincode] = useState('');
+
+  const userrep = useRef('');
+  const [usererrors,setuserErrors] = useState(false);
   const navigate =useNavigate();
-  const { usersId,setUsersid } = useUserAuth();
 
-const {firstname,lastname,dob,userId,gender,addtionreq,mobilNo,email,addline1,addline2,city,state,pincode}=crewMember
-
-const handlechange =(e) =>{
-    let {name,value} = e.target;
-    setCrewMember ({...crewMember,[name]:value})
+const usernameChange =async (e)=>{
+  setUserId(e.target.value)
+  const userref = userrep.current.value
+  const data =await  UserDataService.getCrewMember();
+   data.docs.forEach((doc) => {
+  const newdata = doc.data();
+  if (newdata.userId === userref){
+     setuserErrors(true)
+     setTimeout(()=>{
+      setuserErrors( false);
+        },3000)
+        }
+   })
 }
-console.log(usersId);
-const editHandler = async () => {
-  try {
-  const docSnap = await UserDataService.getCrew(usersId);
-  const doc =docSnap.data()
-    console.log("the record is :",doc);
-    setCrewMember({firstname:doc.firstname,lastname:doc.lastname,dob:doc.dob,userId:doc.userId,gender:doc.gender,
-      addtionreq:doc.addtionreq,mobilNo:doc.mobilNo,email:doc.email,addline1:doc.addline1,addline2:doc.addline2,
-      city:doc.city,state:doc.state,pincode:doc.pincode})
-  } catch (err) {
-      console.log(err);
-  }
-};
-useEffect(() => {
-  if (usersId !== undefined && usersId !== "") {
-    editHandler();
-  }
-}, [usersId]);
 
-
-/// ADD/Edit Crew Member Fn ////
 const submitHandler = async(e) =>{
   e.preventDefault();
   const crew = {
@@ -62,33 +47,40 @@ const submitHandler = async(e) =>{
       firstname,userId,gender,addtionreq,mobilNo,email,location:city,
       days:[{date:'',assignflight:''}]
       };
+      const addCrew ={
+        username:firstname,
+        userId:userId,
+        status:'Active',
+        role:'Crew Member',
+        password: '232323'
+      }
 
   try {
-    if (usersId !== undefined && usersId !== "") {
-      await UserDataService.updateCrew(usersId, crew);
-      setUsersid("");
-      navigate('/admin/crew/viewCrew')
-      console.log(crewMember);
-  }
-    else{
       await UserDataService.addCrewMember(crew)
       await UserDataService.addAssignCrew(assignCrew)
-      console.log(crewMember);
-    }
+      await UserDataService.addUsers(addCrew);  
        
   }catch(err){
       console.log(err)
   }
-  setCrewMember({firstname:"",lastname:"",dob:"",userId:"",gender:"",addtionreq:"",mobilNo:"",email:"",
-  addline1:"",addline2:"",city:"",state:"",pincode:""})
-  setUsersid("");
+  setFirstname('')
+  setLastname('')
+  setDob('')
+  setUserId('')
+  setGender('')
+  setAddtionreq('')
+  setMobilNo('')
+  setEmail('')
+  setAddline1('')
+  setAddline2('')
+  setCity('')
+  setState('')
+  setPincode('')
   navigate('/admin/crew/viewCrew')
- 
 }
 
 const cancelChange =()=>{
-  setUsersid("")
-        navigate('/admin/crew/viewCrew')
+  navigate('/admin/crew/viewCrew')
 }
 return (
   <>
@@ -102,7 +94,7 @@ return (
                 type="text"
                 name="firstname"
                 value={firstname}
-                onChange={handlechange}
+                onChange={(e)=>setFirstname(e.target.value)}
               />
             </div>
             <div className="editUser_input">
@@ -111,7 +103,7 @@ return (
                 type="text"
                 name="lastname"
                 value={lastname}
-                onChange={handlechange}
+                onChange={(e)=>setLastname(e.target.value)}
               />
             </div>
           </div>
@@ -122,16 +114,17 @@ return (
                 type="date"
                 name="dob"
                 value={dob}
-                onChange={handlechange}
+                onChange={(e)=>setDob(e.target.value)}
               />
             </div>
             <div className="editUser_input">
-              <label htmlFor="userid">User ID</label>
-              <Input
+              <label htmlFor="userid">User ID  &nbsp;&nbsp;&nbsp;&nbsp;   <small>{usererrors ? "User Id already exist" : ""}</small></label>
+              <input
                 type="text"
-                name="userId"
+                ref={userrep}
                 value={userId}
-                onChange={handlechange}
+                onChange={usernameChange}
+                
               />
             </div>
           </div>
@@ -142,7 +135,7 @@ return (
                 type="text"
                 name="gender"
                 value={gender}
-                onChange={handlechange}
+                onChange={(e)=>setGender(e.target.value)}
               />
             </div>
             <div className="editUser_input">
@@ -151,7 +144,7 @@ return (
                 type="text"
                 name="addtionreq"
                 value={addtionreq}
-                onChange={handlechange}
+                onChange={(e)=>setAddtionreq(e.target.value)}
               />
             </div>
           </div>
@@ -163,7 +156,7 @@ return (
                   type="tel"
                   name="mobilNo"
                   value={mobilNo}
-                  onChange={handlechange}
+                  onChange={(e)=>setMobilNo(e.target.value)}
                 />
               </div>
               <div>
@@ -172,7 +165,7 @@ return (
                   type="email"
                   name="email"
                   value={email}
-                  onChange={handlechange}
+                  onChange={(e)=>setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -185,7 +178,7 @@ return (
                   placeholder="Address Line 1"
                   name="addline1"
                   value={addline1}
-                  onChange={handlechange}
+                  onChange={(e)=>setAddline1(e.target.value)}
                 />
                 <Input
                   type="text"
@@ -193,7 +186,7 @@ return (
                   placeholder="Address Line 2"
                   name="addline2"
                   value={addline2}
-                  onChange={handlechange}
+                  onChange={(e)=>setAddline2(e.target.value)}
                 />
                 <div className="editCrewAdd">
                   <Input
@@ -201,21 +194,21 @@ return (
                     placeholder="City"
                     name="city"
                     value={city}
-                    onChange={handlechange}
+                    onChange={(e)=>setCity(e.target.value)}
                   />
                   <Input
                     type="text"
                     placeholder="State"
                     name="state"
                     value={state}
-                    onChange={handlechange}
+                    onChange={(e)=>setState(e.target.value)}
                   />
                   <Input
                     type="number"
                     placeholder="Pin code"
                     name="pincode"
                     value={pincode}
-                    onChange={handlechange}
+                    onChange={(e)=>setPincode(e.target.value)}
                   />
                 </div>
               </div>
@@ -229,7 +222,7 @@ return (
             </div>
             <div>
               <button type="submit" className="btn btn-primary">
-              {usersId === "" ? "Add user" : "Save Edit"}
+             Add User
               </button>
             </div>
           </div>

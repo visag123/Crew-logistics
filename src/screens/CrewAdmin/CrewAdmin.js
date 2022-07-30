@@ -4,7 +4,7 @@ import "./Crew.css";
 import { useUserAuth } from '../../Context/UserAuthcontext';
 
 const CrewAdmin = () => {
-  const {isAuth,setIsAuth,crew,setCrew} =useUserAuth();
+  const {setCrew} =useUserAuth();
   useEffect(()=>{
     setCrew(true)
   },[])

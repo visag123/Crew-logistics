@@ -10,7 +10,7 @@ const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
   
-  const [userInfo,setUserInfo] = useState({initial:false,nameId :''});
+  const [userInfo,setUserInfo] = useState({initial:false,nameId :'',userId:''});
   const [crew,setCrew] = useState(false)
   const [trans,setTrans] = useState(false)
   const [isAuth,setIsAuth] =useState(false)

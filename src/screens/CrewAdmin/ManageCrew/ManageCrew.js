@@ -2,17 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "./ManageCrew.css"
 import UserDataService from "../../../firebase/userservice";
-import { useUserAuth } from "../../../context/UserAuthcontext";
-
-
+import { useUserAuth } from "../../../Context/UserAuthcontext";
 
 const ManageCrew = () => {
     const [travel,setTravel] =useState([])
     const { getUserId } = useUserAuth();
     const date = new Date().toISOString().slice(0,10);
     const navigate = useNavigate();
-
-  /// Fetch roster datas from the firebase ///
 
   useEffect(()=>{
     getTravel()

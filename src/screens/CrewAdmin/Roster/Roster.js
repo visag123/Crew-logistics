@@ -19,8 +19,7 @@ const Roster = () => {
   const [to,setTo] =useState('')
   const searchinput = useRef();
   const { getUserId } = useUserAuth();
-
-  // const [fetchFlight,setFetchFlight] = useState([])
+ // const [fetchFlight,setFetchFlight] = useState([])
    
   useEffect(() => {
     getRoster();
@@ -32,13 +31,12 @@ const Roster = () => {
   const searchHandler = (e) => {
     const searchrf = searchinput.current.value;
     setSearchUsers(searchrf);
-
   };
+  
   const onDateChange =(e)=>{
     setDate(e.target.value)
   }
 
-  /// Fetch roster datas from the firebase ///
   const getRoster = async () => {
     const data = await UserDataService.getFlightRoster();
     setRoster(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -47,9 +45,6 @@ const Roster = () => {
     const data = await UserDataService.getFlightRost();
     setFlightRoster(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  // console.log(flightRoster);
-  // console.log(roster);
-
 
   const routeHandler = (e) => {
     e.preventDefault();
@@ -109,10 +104,8 @@ const TableTitle=(data)=>{
     )
   })
 }
-
   return (
-    <>
-    
+    <>   
       <div className="sys-table">
         <div className="rosterHeader">
           <div className="rosterSearch">
@@ -192,7 +185,7 @@ const TableTitle=(data)=>{
                     <td className="Num_crew">{doc.Departure}</td>
                     <td>{doc.Arrival}</td>
                     <td className="Num_crew">{doc.CrewMember}</td>
-                    <td className="crewAssign"><span>{doc.NoOfCrew}</span>
+                    <td className="crewAssign">
                     <button onClick={() => getUserId(doc.id)}><Link to='/admin/crew/addCrew'><i className="fa-solid fa-pen-to-square"></i></Link></button></td>
                   </tr>
                 );

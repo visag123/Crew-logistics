@@ -2,17 +2,18 @@ import React, { useRef } from "react";
 import "./Userlist.css";
 import UserDataService from "../../../firebase/userservice";
 import { useState, useEffect } from "react";
-import { useUserAuth } from "../../../context/UserAuthcontext";
+import { useUserAuth } from "../../../Context/UserAuthcontext";
 import { Link } from "react-router-dom";
 
 const Userlist = () => {
   const [users, setUsers] = useState([]);
+  const [userDetails, setUserDetails] = useState([]);
   const [searchUsers, setSearchUsers] = useState("");
   const [error, setError] = useState(false);
   const searchinput = useRef();
   const [message, setMessage] = useState({ error: false, msg: "" });
   const { signUp, getUserId } = useUserAuth();
-
+// let ssss=[];
   useEffect(() => {
     getUsers();
   }, []);
@@ -20,7 +21,14 @@ const Userlist = () => {
 /// Fetch users datas from the firebase ///
   const getUsers = async () => {
     const data = await UserDataService.getAllUsers();
+             const moro =   data.docs.map((dos)=>({  ...dos.data(),id: dos.id}));
+             setUserDetails(moro.filter((dod)=>{
+               if (dod.role !== "Crew Member" && dod.role !== "Transport Provider") {
+                   return dod
+               }
+             })) 
     setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
   };
 /// Filter non-assigned role users data ///
   const setRolehandler = () => {
@@ -122,7 +130,7 @@ const Userlist = () => {
             </tr>
           </thead>
           <tbody>
-            {users.filter((doc)=>{
+            {userDetails.filter((doc)=>{
               if (searchUsers === '' && error === false){
                  return doc
               } 

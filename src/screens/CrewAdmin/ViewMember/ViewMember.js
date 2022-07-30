@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import UserDataService from "../../../firebase/userservice";
 import { Link, useNavigate } from "react-router-dom";
-import { useUserAuth } from "../../../context/UserAuthcontext";
+import { useUserAuth } from "../../../Context/UserAuthcontext";
 
 const ViewMember = () => {
   const [crewMember, setCrewMember] = useState([]);
+  const [searchUsers, setSearchUsers] = useState("");
+  const searchinput = useRef();
   const navigate = useNavigate();
   const { getUserId } = useUserAuth();
 
@@ -12,7 +14,11 @@ const ViewMember = () => {
     getCrewMember();
   }, []);
 
-  /// Fetch roster datas from the firebase ///
+  const searchHandler = (e) => {
+    const searchrf = searchinput.current.value;
+    setSearchUsers(searchrf);
+  };
+
   const getCrewMember = async () => {
     const data = await UserDataService.getAssignCrews();
     setCrewMember(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -24,13 +30,22 @@ const ViewMember = () => {
   return (
     <>
       <div className="editpage_search">
-        <form>
+        <div className="editpage_Title"><h5>Crew Members List</h5></div>
+      <div className="editpage_search_filter">
+      <form>
           <button type="submit">
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
-          <input type="text" placeholder="search" />
+           <input
+              type="text"
+              placeholder="Search"             
+              ref={searchinput}
+              value={searchUsers}
+              onChange={searchHandler}
+            />
         </form>
         <i className="fa-solid fa-circle-plus" onClick={addCrewMember}></i>
+      </div>
       </div>
       <div className="sys-table">
         <table>
@@ -45,7 +60,17 @@ const ViewMember = () => {
             </tr>
           </thead>
           <tbody>
-            {crewMember.map((doc) => {
+            {crewMember
+              .filter((doc) => {
+                if (searchUsers === ''){
+                  return doc
+               }
+                else if (doc.firstname.toLowerCase().includes(searchUsers.toLowerCase())) {
+                  return doc;
+                } 
+                              
+              })
+            .map((doc) => {
               return (
                 <tr key={doc.id}>
                   <td >{doc.userId}</td>

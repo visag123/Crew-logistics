@@ -2,9 +2,9 @@ import React from 'react';
 import { useState,useEffect } from 'react';
 import { useNavigate } from "react-router";
 import UserDataService from "../../../firebase/userservice";
-import Input from '../../../components/input/Input';
+import Input from '../../../components/Input/Input';
 import "./Edit.css"
-import { useUserAuth } from '../../../context/UserAuthcontext';
+import { useUserAuth } from '../../../Context/UserAuthcontext';
 
 const Editpage = () => {
     const [userId,setUserId] = useState('');
@@ -56,7 +56,6 @@ const Editpage = () => {
         try {
             if (usersId !== undefined && usersId !== "") {
               await UserDataService.updateUser(usersId, newuser);
-              console.log(lifespanTo);
               setUsersid("");
               navigate('/admin/users')
           }
@@ -68,6 +67,8 @@ const Editpage = () => {
             console.log(err)
         }
       }
+     
+
       const clearUser =()=>{
         setUsersid("")
         navigate('/admin/users')
@@ -76,14 +77,7 @@ const Editpage = () => {
   return (
     <>
         <div className="editpage_maincontent">
-          <div className="editpage_search">
-            <form>
-              <button type="submit">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </button>
-              <input type="text" placeholder="search" />
-            </form>
-          </div>
+  
           <div className="editpage_edit">
             <div className="edit">
               <form onSubmit={submitHandler}>

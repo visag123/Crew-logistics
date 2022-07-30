@@ -1,5 +1,5 @@
 .editpage_maincontent{
-    width: 100%;
+    width: 70%;
     /* background:#fefeff; */
 }
 .editpage_search{
@@ -8,7 +8,7 @@
     margin: 10px auto;
     width: 95%;
     display: flex;
-    justify-content: end;
+    justify-content:space-between;
     align-items: center;
     padding: 5px;
 }
@@ -18,6 +18,19 @@
     background: #e1e4e8;
     text-align: center;
     border-radius: 5px;
+}
+.editpage_search_filter{
+    display: flex;
+    align-items: center;
+}
+.editpage_Title h5{
+    padding-top: 15px;
+    color: #004387;
+    font-weight: 600;
+}
+.editpage_Addprovider{
+    display: flex;
+    flex-direction: column;
 }
 .editpage_search button{
     border: none;
@@ -31,6 +44,9 @@
     background:#e1e4e8 ;
     
     /* padding: 1px; */
+}
+.editpage_search a{
+text-decoration: none;
 }
 .editpage_edit{
     width: 100%;
@@ -59,7 +75,6 @@
 .lifeSpan input{
     width: 120px;
     font-size: 15px;
-    /* margin-left: 10px; */
     border: none;
     outline: none;
     margin:10px 0px 25px 0px;
@@ -92,6 +107,7 @@
     outline: none;
     margin:10px 0px 25px 0px;
     border-bottom: 1px solid #004387;
+    padding-left: 8px;
     
 }
 .editUser select{
@@ -109,6 +125,16 @@
     flex-direction: column;
     background: none;
     
+}
+.editUser_in input{
+    width: 260px;
+    font-size: 15px;
+    padding-left: 8px;
+    border: none;
+    background: none;
+    outline: none;
+    margin:10px 0px 25px 0px;
+    border-bottom: 1px solid #004387;
 }
 .edit label{
     font-weight: bolder;

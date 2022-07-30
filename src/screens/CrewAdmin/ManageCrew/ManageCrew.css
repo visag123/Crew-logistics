@@ -8,6 +8,10 @@
     display: flex;
     margin-bottom: 20px;
 }
+.SearshFlightNo{
+    display: flex;
+   
+}
 .addCrewHeader input{
     margin-right: 30px;
     outline: none;

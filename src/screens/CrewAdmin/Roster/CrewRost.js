@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import {BsCircle} from 'react-icons/bs';
 import {GiCommercialAirplane} from 'react-icons/gi';
 import './CrewRost.css';
-import { useUserAuth } from "../../../context/UserAuthcontext";
+import { useUserAuth } from "../../../Context/UserAuthcontext";
 import UserDataService from "../../../firebase/userservice";
 
 export const CrewRost = () => {
@@ -12,13 +12,12 @@ export const CrewRost = () => {
   const { usersId,setUsersid } = useUserAuth();
   const date = new Date().toISOString().slice(0,10)
   const [today,setDate] =useState(date);
-  // const [flag,setDate] =useState(date);
+  const [flag,setflag] =useState(false);
 
   /// Get user details for edit ///
      const editHandler = async () => {
           try {
             const docSnap = await UserDataService.getAssignCrewID(usersId);
-            // console.log("the record is :", docSnap.data());
             const doc = docSnap.data();
             setTodo(doc);  
             console.log(doc);
@@ -36,27 +35,32 @@ export const CrewRost = () => {
         useEffect(() => {
           getFlightroster();
         }, []);
-      
-        /// Fetch roster datas from the firebase ///
+  
         const getFlightroster = async () => {
           const data = await UserDataService. getAssignFlight();
           setFlightData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };    
         const onDateChange =(e)=>{
           setDate(e.target.value)
+          setflag(true)
+        }
+        const resetSearch = () => {
+          setflag(false)
+          setDate(date)
         }
       
   return (
     <>
-    <div className="filterDate">
-              <li>Select Date</li>
+            <div className="CrewfilterDate">
+             <label>Select Date</label>
               <input type="date" value={today} onChange={onDateChange} />
+              <button type="reset" onClick={resetSearch}><i className="fa-solid fa-delete-left"></i></button>
             </div>
             
 
     {  flightData.filter((doc) => {
        
-          if (todo.userId === doc.crewMemberId  ) {
+          if (todo.userId === doc.crewMemberId && flag === false ) {
                   return doc;
                 } 
                 else if(todo.userId === doc.crewMemberId && today === doc.date ){

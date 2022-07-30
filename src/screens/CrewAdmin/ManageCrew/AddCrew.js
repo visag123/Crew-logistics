@@ -121,6 +121,7 @@ const updateFlightNo = async () =>{
           Destination:getFlightDetail.Destination,
           Departure:getFlightDetail.Departure,
           Arrival:getFlightDetail.Arrival,
+          ContactNo:crewMember.mobilNo
         }        
   try {
     if (getNoOfCrew < getFlightDetail.CrewMember+1 && checkbox === true) {
@@ -141,10 +142,10 @@ const updateFlightNo = async () =>{
     <>
       <div className="sys-table">
         <div className="addCrewHeader">
-          <div>
+          <div className="SearshFlightNo">
             <Input type="text" label="Flight No" value={getFlightNo} onChange={(e) => setGetFlightNo(e.target.value)}/>
           </div>
-          <div>
+          <div className="SearshFlightNo">
             <Input
               type="date"
               label="Date"
@@ -153,7 +154,7 @@ const updateFlightNo = async () =>{
             />
           </div>
           <div>
-            <Button onClick={updateFlightNo}>Save </Button>
+            <Button onClick={updateFlightNo}>Save</Button>
           </div>
           <div>
             <Button onClick={clearUser}>Cancel</Button>

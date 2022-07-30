@@ -94,3 +94,29 @@ h5 small{
     background: rgb(50, 205, 63);
     border-radius: 10px;
 }
+.CrewfilterDate{
+    display: flex;
+    margin: 20px 0px 10px 20px ;
+}
+.CrewfilterDate label{
+     margin-right: 10px;
+     font-weight: bolder;
+     color: rgb(2, 44, 116);
+}
+.CrewfilterDate input{
+    padding:2px 8px;
+    border: 1px solid rgb(87, 87, 232);
+    background-color: rgb(244, 240, 240);
+    border-radius: 10px;
+    outline: none;
+} 
+
+.CrewfilterDate button{
+    padding:0px 8px;
+    margin-left: 25px;
+    border: 1px solid rgb(81, 124, 225);
+    background-color: rgb(81, 124, 225);
+    color: white;
+    border-radius: 30%;
+    outline: none;
+}

@@ -2,11 +2,11 @@ import React, {  useState } from "react";
 import  "./Login.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useUserAuth } from "../../context/UserAuthcontext";
+import { useUserAuth } from "../../Context/UserAuthcontext";
 import UserDataService from"../../firebase/userservice";
-import logo from "../../assets/landscape-view.jpg"
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
+import logo from "../../assets/landscape-view.jpg";
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -48,7 +48,16 @@ const Login = () => {
               setTrans(true)
               setIsAuth(!isAuth)
                navigate("/admin/trans");
-             } else {
+             }else if (newdata.role === "Crew Member") {
+              setUserInfo({initial:true , nameId:username,userId:newdata.userId})
+               navigate("/crewmember");
+             }
+             else if (newdata.role === "Transport Provider") {
+              setUserInfo({initial:true , nameId:username})
+               navigate("/transportprovider");
+             }
+             
+             else {
                navigate("/");
              }
            } else {
@@ -61,6 +70,7 @@ const Login = () => {
          }
        }
      });
+     
    } catch (err) {
     setMessage({ error: true, msg:'Username Invalid' });
     clearMassage();

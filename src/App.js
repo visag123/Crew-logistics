@@ -37,8 +37,7 @@ function App() {
             <Route path="/" element={<Login />}/>
             <Route path="/sidebar" element={<Sidebar />}/>
             <Route path="/reset" element={<Resetpassword />}/>
-            <Route path="/signup" element={<Signup />}/>
-            
+            <Route path="/signup" element={<Signup />}/>          
             <Route path="/crewmember" element={<CrewMember />}>
             <Route path="memberRoster" element={<CrewMemberRoster/>}/>       
             </Route>

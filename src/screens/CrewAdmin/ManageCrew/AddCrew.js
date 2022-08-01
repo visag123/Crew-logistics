@@ -4,10 +4,11 @@ import UserDataService from "../../../firebase/userservice";
 import Input from "../../../components/Input/Input";
 import { useUserAuth } from "../../../Context/UserAuthcontext";
 import Button from "../../../components/Button/Button";
+import Default from "../../Default.json";
 
 const AddCrew = () => {
   const [assignMember, setAssignMember] = useState([]);
-  const [assignCrewMember, setAssignCrewMember] = useState([]);
+  // const [assignCrewMember, setAssignCrewMember] = useState([]);
   const [getFlightDetail,setGetFlightDetail] = useState('');
   const [getFlightNo,setGetFlightNo] = useState('');
   const [getFlightOrigin,setGetFlightOrigin] = useState('');
@@ -21,6 +22,9 @@ const AddCrew = () => {
   const [todayDate,setTodayDate] = useState(date)
   const navigate = useNavigate();
   
+  let value = Default.Table;
+  let {Gender,EmployeeName,AdditionalRequests,UserID}=value;
+
   const editHandler = async () => {
     try {
     const docSnap = await UserDataService.getFlightID(usersId);
@@ -49,7 +53,6 @@ const AddCrew = () => {
     getCrewMember();
   }, []);
 
-  /// Fetch roster datas from the firebase ///
   const getCrewMember = async () => {
     const data = await UserDataService.getAssignCrews();
     setAssignMember(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -166,10 +169,10 @@ const updateFlightNo = async () =>{
               <th>
                 <input type="checkbox" />
               </th>
-              <th>User ID</th>
-              <th>Employee Name</th>
-              <th>Gender</th>
-              <th className="addReq">Additional Requests</th>
+              <th>{UserID}</th>
+              <th>{EmployeeName}</th>
+              <th>{Gender}</th>
+              <th className="addReq">{AdditionalRequests}</th>
             </tr>
           </thead>
           <tbody>

@@ -1,5 +1,6 @@
 import React,{ useState, useEffect,useRef}  from 'react';
 import UserDataService from "../../../firebase/userservice";
+import Default from "../../Default.json";
 
 const CrewLogistic = () => {
     const [flightData,setFlightData] = useState([]);
@@ -13,6 +14,9 @@ const CrewLogistic = () => {
     const [flag,setFlag] =useState(false)
     const [to,setTo] =useState('')
     const searchinput = useRef();
+
+    let value = Default.Table;
+    let {FlightRoute,RequestTransport,EmployeeName,Dates,ContactNO,UserID}=value;
 
     useEffect(() => {
         getFlightroster();
@@ -98,12 +102,12 @@ const CrewLogistic = () => {
         <table>
           <thead>
             <tr>
-              <th>User ID</th>
-              <th>Employee Name</th>
-              <th >Flight Route</th>
-              <th>Contact NO</th>             
-              <th>Date</th>
-              <th>Request Transport</th>
+              <th>{UserID}</th>
+              <th>{EmployeeName}</th>
+              <th >{FlightRoute}</th>
+              <th>{ContactNO}</th>             
+              <th>{Dates}</th>
+              <th>{RequestTransport}</th>
             </tr>
           </thead>
           <tbody>

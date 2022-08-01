@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { useNavigate } from "react-router";
 import UserDataService from "../../../firebase/userservice";
 import Input from '../../../components/Input/Input';
+import Default from "../../Default.json";
 
 const AddTransProvider = () => {
     const [agencyName,setAgencyName] = useState('');
@@ -12,7 +13,11 @@ const AddTransProvider = () => {
     const [noOfDrivers,setNoOfDrivers] = useState('');
     const [activeFrom,setActiveFrom] = useState('');
     const [activeTo,setActiveTo] = useState('');
-     const navigate = useNavigate();
+    const [email,setEmail] = useState('');
+    const navigate = useNavigate();
+
+    let value = Default.Form;
+    let {ActivePeriod,NoofDrivers,ContactNO,NoOfVehicles,Location,AgencyName,Email}=value
   
       const submitHandler = async(e) =>{
         e.preventDefault();
@@ -24,6 +29,7 @@ const AddTransProvider = () => {
             noOfDrivers,
             activeFrom,
             activeTo,
+            email
           };
           const newuser ={
             location,
@@ -31,10 +37,10 @@ const AddTransProvider = () => {
             status:'Active',
             role:'Transport Provider',
             password:'232323',
+            email
           }
 
-        try {
-           
+        try {           
             await UserDataService.addTransProvider(newProvider);
             await UserDataService.addUsers(newuser);
             navigate('/admin/trans/transprovider')
@@ -51,15 +57,15 @@ const AddTransProvider = () => {
   return (
     <>
     <div className="editpage_maincontent">
-     
+    <div className="addcrewTitle"><h5>Add New Transport Provider</h5></div>
       <div className="editpage_edit">
         <div className="edit">
           <form onSubmit={submitHandler}>
             <div className="editUser">
               <div className="editUser_input"> 
-                <label htmlFor="agencyName">Agency Name</label>
+                <label htmlFor="agencyName">{AgencyName.label}</label>
                 <Input
-                  type="text"
+                  type={AgencyName.type}
                   id="agencyName"
                   value={agencyName}
                   onChange={(e) => {
@@ -69,9 +75,9 @@ const AddTransProvider = () => {
                 />
               </div>
               <div className="editUser_input">
-                <label htmlFor="contactNo">Contact NO</label>
+                <label htmlFor="contactNo">{ContactNO.label}</label>
                 <Input
-                  type="text"
+                  type={ContactNO.type}
                   id="contactNo"
                   value={contactNo}
                   onChange={(e) => {
@@ -83,7 +89,7 @@ const AddTransProvider = () => {
             </div>
             <div className="editUser"> 
               <div className="editUser_input">
-                <label htmlFor="location">Location</label>
+                <label htmlFor="location">{Location.label}</label>
                 <select value={location}
                   id="role"
                   onChange={(e) => setLocation(e.target.value)}
@@ -97,9 +103,9 @@ const AddTransProvider = () => {
                 </select>
               </div>
               <div className="editUser_input">
-              <label htmlFor="noOfVehicles">NO of Vehicles</label>
+              <label htmlFor="noOfVehicles">{NoOfVehicles.label}</label>
               <Input
-                  type="text"
+                  type={NoOfVehicles.type}
                   id="noOfVehicles"
                   value={noOfVehicles}
                   onChange={(e) => {
@@ -110,9 +116,9 @@ const AddTransProvider = () => {
             </div>
             <div className="editUser_status">
             <div className="editUser_in"> 
-                <label htmlFor="noOfDrivers">No of Drivers</label>
+                <label htmlFor="noOfDrivers">{NoofDrivers.label}</label>
                 <Input
-                  type="text"
+                  type={NoofDrivers.type}
                   id="noOfDrivers"
                   value={noOfDrivers}
                   onChange={(e) => {
@@ -122,10 +128,10 @@ const AddTransProvider = () => {
               </div>
               
               <div className="editUser_input">
-              <label htmlFor="">Active Period</label>
+              <label htmlFor="">{ActivePeriod.label}</label>
                <div className='lifeSpan'>
                 <Input
-                  type="date"
+                  type={ActivePeriod.type}
                   className="lifeSpan_time"
                   value={activeFrom}
                   onChange={(e) => {
@@ -134,7 +140,7 @@ const AddTransProvider = () => {
                 />
                 <font>to</font>
                 <Input
-                  type="date"
+                  type={ActivePeriod.type}
                   value={activeTo}
                   className="lifeSpan_time"
                   onChange={(e) => {
@@ -143,8 +149,21 @@ const AddTransProvider = () => {
                 />
                 </div>
               </div>
+              
             </div>
-
+            <div className="editUser">
+              <div className="editUser_input"> 
+                <label htmlFor="agencyName">{Email.label}</label>
+                <Input
+                  type={Email.type}
+                  id="agencyName"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
             <div className="editUser_button">
               <div>
                 <button

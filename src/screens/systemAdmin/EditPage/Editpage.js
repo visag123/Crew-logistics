@@ -5,6 +5,7 @@ import UserDataService from "../../../firebase/userservice";
 import Input from '../../../components/Input/Input';
 import "./Edit.css"
 import { useUserAuth } from '../../../Context/UserAuthcontext';
+import Default from "../../Default.json";
 
 const Editpage = () => {
     const [userId,setUserId] = useState('');
@@ -16,6 +17,9 @@ const Editpage = () => {
     const [lifespanTo,setLifeSpanTo] = useState('');
      const navigate = useNavigate();
      const { usersId,setUsersid } = useUserAuth();
+
+     let value = Default.Form;
+     let {UserId,Status,Email,Username,Role,Lifespan}=value
 
 /// Get user details for edit ///
    const editHandler = async () => {
@@ -83,9 +87,9 @@ const Editpage = () => {
               <form onSubmit={submitHandler}>
                 <div className="editUser">
                   <div className="editUser_input">
-                    <label htmlFor="userid">UserID</label>
+                    <label htmlFor="userid">{UserId.label}</label>
                     <Input
-                      type="text"
+                      type={UserId.type}
                       id="userid"
                       value={userId}
                       onChange={(e) => {
@@ -95,9 +99,9 @@ const Editpage = () => {
                     />
                   </div>
                   <div className="editUser_input">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username">{Username.label}</label>
                     <Input
-                      type="text"
+                      type={Username.type}
                       id="username"
                       value={username}
                       onChange={(e) => {
@@ -109,9 +113,9 @@ const Editpage = () => {
                 </div>
                 <div className="editUser">
                   <div className="editUser_input">
-                    <label htmlFor="email">E-mail</label>
+                    <label htmlFor="email">{Email.label}</label>
                     <Input
-                      type="text"
+                      type={Email.type}
                       id="email"
                       value={email}
                       onChange={(e) => {
@@ -120,7 +124,7 @@ const Editpage = () => {
                     />
                   </div>
                   <div className="editUser_input">
-                    <label htmlFor="role">Role</label>
+                    <label htmlFor="role">{Role.label}</label>
                     <select value={role}
                       id="role"
                       onChange={(e) => setRole(e.target.value)}
@@ -133,7 +137,7 @@ const Editpage = () => {
                 </div>
                 <div className="editUser_status">
                   <div className="editUser_input">
-                    <label htmlFor="status">Status</label>
+                    <label htmlFor="status">{Status.label}</label>
                     <select value={status}
                       id="status"
                       onChange={(e) => setStatus(e.target.value)}
@@ -144,10 +148,10 @@ const Editpage = () => {
                     </select>
                   </div>
                   <div className="editUser_input">
-                  <label htmlFor="">User Access Lifespan</label>
+                  <label htmlFor="">{Lifespan.label}</label>
                    <div className='lifeSpan'>
                     <Input
-                      type="date"
+                      type={Lifespan.type}
                       className="lifeSpan_time"
                       placeholder="from"
                       value={lifespanFrom}
@@ -157,7 +161,7 @@ const Editpage = () => {
                     />
                     <font>to</font>
                     <Input
-                      type="date"
+                      type={Lifespan.type}
                       value={lifespanTo}
                       className="lifeSpan_time"
                       placeholder="to"

@@ -35,25 +35,25 @@ const Login = () => {
      data.docs.forEach((doc) => {
        const newdata = doc.data();
        // console.log(newdata);
-       if (newdata.username === username) {
+       if (newdata.email === username) {
          if (newdata.password === password) {
            if (newdata.status === "Active") {
              if (newdata.role === "Crew Admin") {
-              setUserInfo({initial:true , nameId:username})
+              setUserInfo({initial:true , nameId:newdata.username})
               setCrew(true)
                setIsAuth(!isAuth)
                navigate("/admin/crew");
              } else if (newdata.role === "Transport Admin") {
-              setUserInfo({initial:true , nameId:username})
+              setUserInfo({initial:true , nameId:newdata.username})
               setTrans(true)
               setIsAuth(!isAuth)
                navigate("/admin/trans");
              }else if (newdata.role === "Crew Member") {
-              setUserInfo({initial:true , nameId:username,userId:newdata.userId})
+              setUserInfo({initial:true , nameId:newdata.username,userId:newdata.userId})
                navigate("/crewmember");
              }
              else if (newdata.role === "Transport Provider") {
-              setUserInfo({initial:true , nameId:username})
+              setUserInfo({initial:true , nameId:newdata.username})
                navigate("/transportprovider");
              }
              

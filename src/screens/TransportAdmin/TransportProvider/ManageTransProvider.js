@@ -1,10 +1,13 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from "react-router-dom";
 import UserDataService from "../../../firebase/userservice";
-
+import Default from "../../Default.json";
 
 const ManageTransProvider = () => {
    const [transProvider,setTransProvider] =useState([]);
+
+   let value = Default.Table;
+   let {AgencyName,Location,NoofDrivers,NoofVehicles,ContactNO}=value
 
   useEffect(() => {
     getTransProvider();
@@ -28,11 +31,11 @@ const ManageTransProvider = () => {
         <table>
           <thead>
             <tr>
-              <th>Agency Name</th>
-              <th>Location</th>
-              <th >Contact No</th>
-              <th>No of Vehicles</th>             
-              <th>No of Drivers</th>
+              <th>{AgencyName}</th>
+              <th>{Location}</th>
+              <th >{ContactNO}</th>
+              <th>{NoofVehicles}</th>             
+              <th>{NoofDrivers}</th>
             </tr>
           </thead>
           <tbody>

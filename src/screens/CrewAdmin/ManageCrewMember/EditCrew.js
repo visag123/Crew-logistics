@@ -1,6 +1,7 @@
 import React, { useState,useEffect ,useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
-import  "./EditCrew.css"
+import  "./EditCrew.css";
+import Default from "../../Default.json";
 import Input from '../../../components/Input/Input';
 import UserDataService from "../../../firebase/userservice";
 
@@ -24,6 +25,7 @@ const [pincode,setPincode] = useState('');
   const navigate =useNavigate();
 
 const usernameChange =async (e)=>{
+  
   setUserId(e.target.value)
   const userref = userrep.current.value
   const data =await  UserDataService.getCrewMember();
@@ -37,8 +39,11 @@ const usernameChange =async (e)=>{
         }
    })
 }
-
-const submitHandler = async(e) =>{
+let value = Default.Form;
+let {FirstName,LastName,Dop,UserId,Gender,Email,
+  Addline1,Addline2,City,State,Pincode,Addtionreq,MobilNo,Address}= value ;
+  
+  const submitHandler = async(e) =>{
   e.preventDefault();
   const crew = {
     firstname,lastname,dob,userId,gender,addtionreq,mobilNo,email,addline1,addline2,city,state,pincode,
@@ -85,23 +90,24 @@ const cancelChange =()=>{
 return (
   <>
     <div className="editpage_edit">
+    <div className="addcrewTitle"><h5>Add New Crew Member</h5></div>
       <div className="editCrewHome">
         <form onSubmit={submitHandler}>
           <div className="editCrew">
             <div className="editUser_input">
-              <label htmlFor="firstname">First name</label>
+              <label htmlFor="firstname">{FirstName.label}</label>
               <Input
-                type="text"
-                name="firstname"
+                type={FirstName.type}
+                name={FirstName.name}
                 value={firstname}
                 onChange={(e)=>setFirstname(e.target.value)}
               />
             </div>
             <div className="editUser_input">
-              <label htmlFor="lastname">Last name</label>
+              <label htmlFor="lastname">{LastName.label}</label>
               <Input
-                type="text"
-                name="lastname"
+                type={LastName.type}
+                name={LastName.name}
                 value={lastname}
                 onChange={(e)=>setLastname(e.target.value)}
               />
@@ -109,18 +115,18 @@ return (
           </div>
           <div className="editCrew">
             <div className="editUser_input">
-              <label htmlFor="dob">Date of Birth</label>
+              <label htmlFor="dob">{Dop.label}</label>
               <Input
-                type="date"
-                name="dob"
+                type={Dop.label}
+                name={Dop.label}
                 value={dob}
                 onChange={(e)=>setDob(e.target.value)}
               />
             </div>
             <div className="editUser_input">
-              <label htmlFor="userid">User ID  &nbsp;&nbsp;&nbsp;&nbsp;   <small>{usererrors ? "User Id already exist" : ""}</small></label>
+              <label htmlFor="userid">{UserId.label}  &nbsp;&nbsp;&nbsp;&nbsp;   <small>{usererrors ? "User Id already exist" : ""}</small></label>
               <input
-                type="text"
+                type={UserId.type}
                 ref={userrep}
                 value={userId}
                 onChange={usernameChange}
@@ -130,19 +136,28 @@ return (
           </div>
           <div className="editCrew">
             <div className="editUser_input">
-              <label htmlFor="gender">Gender</label>
-              <Input
-                type="text"
-                name="gender"
+              <label htmlFor="gender">{Gender.label}</label>
+              {/* <Input
+                type={Gender.type}
+                name={Gender.name}
                 value={gender}
                 onChange={(e)=>setGender(e.target.value)}
-              />
+              /> */}
+               <select value={gender}
+                  id="role"
+                  onChange={(e) => setGender(e.target.value)}
+                >
+                  <option value="Select gender">Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+          
+                </select>
             </div>
             <div className="editUser_input">
-              <label htmlFor="addtionreq">Additional Requests</label>
+              <label htmlFor="addtionreq">{Addtionreq.label}</label>
               <Input
-                type="text"
-                name="addtionreq"
+                type={Addtionreq.type}
+                name={Addtionreq.type}
                 value={addtionreq}
                 onChange={(e)=>setAddtionreq(e.target.value)}
               />
@@ -151,19 +166,18 @@ return (
           <div className="editCrewMob">
             <div className="editMob">
               <div>
-                <label htmlFor="mobileNo">Mobile No</label>
+                <label htmlFor="mobileNo">{MobilNo.label}</label>
                 <Input
-                  type="tel"
-                  name="mobilNo"
+                  type={MobilNo.type}
+                  name={MobilNo.name}
                   value={mobilNo}
                   onChange={(e)=>setMobilNo(e.target.value)}
                 />
               </div>
               <div>
-                <label htmlFor="email">E-mail</label>
+                <label htmlFor="email">{Email.label}</label>
                 <Input
-                  type="email"
-                  name="email"
+                  type={Email.type}
                   value={email}
                   onChange={(e)=>setEmail(e.target.value)}
                 />
@@ -171,42 +185,42 @@ return (
             </div>
             <div className="editCrewAddress">
               <div>
-                <label htmlFor="address">Address</label>
+                <label htmlFor="address">{Address.label}</label>
                 <Input
-                  type="text"
+                  type={Addline1.type}
                   className="editAdd"
-                  placeholder="Address Line 1"
-                  name="addline1"
+                  placeholder={Addline1.label}
+                  name={Addline1.name}
                   value={addline1}
                   onChange={(e)=>setAddline1(e.target.value)}
                 />
                 <Input
-                  type="text"
+                  type={Addline2.type}
                   className="editAdd"
-                  placeholder="Address Line 2"
-                  name="addline2"
+                  placeholder={Addline2.label}
+                  name={Addline2.name}
                   value={addline2}
                   onChange={(e)=>setAddline2(e.target.value)}
                 />
                 <div className="editCrewAdd">
                   <Input
-                    type="text"
-                    placeholder="City"
-                    name="city"
+                    type={City.type}
+                    placeholder={City.label}
+                    name={City.name}
                     value={city}
                     onChange={(e)=>setCity(e.target.value)}
                   />
                   <Input
-                    type="text"
-                    placeholder="State"
-                    name="state"
+                    type={State.type}
+                    placeholder={State.label}
+                    name={State.name}
                     value={state}
                     onChange={(e)=>setState(e.target.value)}
                   />
                   <Input
-                    type="number"
-                    placeholder="Pin code"
-                    name="pincode"
+                    type={Pincode.type}
+                    placeholder={Pincode.label}
+                    name={Pincode.name}
                     value={pincode}
                     onChange={(e)=>setPincode(e.target.value)}
                   />

@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from 'react';
 import Default from "../../Default.json";
-import Input from '../../../components/Input/Input';
+import Input from '../../../components/input/Input';
 import UserDataService from "../../../firebase/userservice";
-import { useUserAuth } from "../../../Context/UserAuthcontext";
+import { useUserAuth } from "../../../context/UserAuthcontext";
 import { Link, useNavigate } from "react-router-dom";
 
 

@@ -25,6 +25,7 @@ import ManageTransProvider from "./screens/TransportAdmin/TransportProvider/Mana
 import AddTransProvider from "./screens/TransportAdmin/TransportProvider/AddTransProvider";
 import TransportProvider from "./screens/TransProviderAgency/TransportProvider";
 import ManageDrivers from "./screens/TransProviderAgency/ManageDrivers/ManageDrivers";
+import ArrangeTransport from "./screens/CrewAdmin/CrewLogistic/ArrangeTransport";
 
 
 
@@ -61,6 +62,7 @@ function App() {
             <Route path="addCrew" element={<AddCrew/>}/>
             <Route path="crewRost" element={<CrewRost/>}/>
             <Route path="crewLogis" element={<CrewLogistic/>}/>
+            <Route path="arrangetrans" element={<ArrangeTransport/>}/>
             </Route>
             </Route>
           </Routes>

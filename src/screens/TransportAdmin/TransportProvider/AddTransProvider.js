@@ -17,7 +17,7 @@ const AddTransProvider = () => {
     const navigate = useNavigate();
 
     let value = Default.Form;
-    let {ActivePeriod,NoofDrivers,ContactNO,NoOfVehicles,Location,AgencyName,Email}=value
+    let {ActivePeriod,NoofDrivers,ContactNo,NoOfVehicles,Location,AgencyName,Email}=value
   
       const submitHandler = async(e) =>{
         e.preventDefault();
@@ -75,9 +75,9 @@ const AddTransProvider = () => {
                 />
               </div>
               <div className="editUser_input">
-                <label htmlFor="contactNo">{ContactNO.label}</label>
+                <label htmlFor="contactNo">{ContactNo.label}</label>
                 <Input
-                  type={ContactNO.type}
+                  type={ContactNo.type}
                   id="contactNo"
                   value={contactNo}
                   onChange={(e) => {

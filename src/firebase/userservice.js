@@ -19,6 +19,7 @@ const flightRostCollectionRef = collection(db, "flightRoster");
 const assignflightCollectionRef = collection(db, "assignFlight");
 const assignCrewCollectionRef = collection(db, "assignCrew");
 const transProviderCollectionRef = collection(db, "transProvider");
+const logisticsArrangeCollectionRef = collection(db, "logisticsArrange");
 class UserDataService {
   addUsers = (newUser) => {
     return addDoc(userCollectionRef, newUser);
@@ -43,6 +44,9 @@ class UserDataService {
   };
   addTransProvider = (addAgency) => {
     return addDoc(transProviderCollectionRef, addAgency);
+  };
+  addlogisticsArrange = (addcrew) => {
+    return addDoc(logisticsArrangeCollectionRef, addcrew);
   };
   
   updateUser = (id, updatedUser) => {
@@ -103,6 +107,10 @@ class UserDataService {
   getCrew = (id) => {
     const crewDoc = doc(db, "crew member", id);
     return getDoc(crewDoc);
+  };
+  getAssignFlightId = (id) => {
+    const assignFlight = doc(db, "assignFlight", id);
+    return getDoc(assignFlight);
   };
   addDriver =(driver)=>{
     return addDoc(cabDriverCollectionRef, driver);

@@ -2,6 +2,7 @@ import React, { useState, useEffect,useRef } from "react";
 import UserDataService from "../../../firebase/userservice";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../../context/UserAuthcontext";
+import Default from "../../Default.json";
 
 const ViewMember = () => {
   const [crewMember, setCrewMember] = useState([]);
@@ -9,6 +10,9 @@ const ViewMember = () => {
   const searchinput = useRef();
   const navigate = useNavigate();
   const { getUserId } = useUserAuth();
+
+  let value = Default.Table;
+  let {UserID,EmployeeName,Gender,ContactNO,Email,ViewRoster}=value
 
   useEffect(() => {
     getCrewMember();
@@ -51,12 +55,12 @@ const ViewMember = () => {
         <table>
           <thead>
             <tr>
-              <th>User ID</th>
-              <th>Employee Name</th>
-              <th>Gender</th>
-              <th>Contact NO</th>
-              <th >Mail ID</th>
-              <th>View Roster</th>
+              <th>{UserID}</th>
+              <th>{EmployeeName}</th>
+              <th>{Gender}</th>
+              <th>{ContactNO}</th>
+              <th>{Email}</th>
+              <th>{ViewRoster}</th>
             </tr>
           </thead>
           <tbody>

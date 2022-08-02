@@ -3,10 +3,18 @@ import { Link } from 'react-router-dom';
 import "./ManageDrivers.css"
 import UserDataService from "../../../firebase/userservice";
 import { useUserAuth } from '../../../context/UserAuthcontext';
+import Default from "../../Default.json";
 
 const ManageDrivers = () => {
 
   const [drivers, setDrivers] = useState([])
+  let value = Default.Table;
+  let {DriverName,AssignedCab,ServiceArea,Status,ContactNO,UserID}=value
+  
+
+useEffect(() => {
+  getTransProvider();
+}, []);
 
   const { getUserId, userInfo } = useUserAuth();
 
@@ -31,16 +39,15 @@ const ManageDrivers = () => {
         </Link></div>
       </div>
       <div className="sys-table">
-
         <table>
           <thead>
             <tr>
-              <th>Driver Name</th>
-              <th>User ID</th>
-              <th>Status</th>
-              <th>Contact Number</th>
-              <th>Service Area</th>
-              <th>Assigned Cab</th>
+            <th>{DriverName}</th>
+              <th>{UserID}</th>
+              <th>{Status}</th>
+              <th>{ContactNO}</th>
+              <th>{ServiceArea}</th>
+              <th>{AssignedCab}</th>
             </tr>
           </thead>
           <tbody>

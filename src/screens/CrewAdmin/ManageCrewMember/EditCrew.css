@@ -1,10 +1,8 @@
 .editCrewHome{
     width: 800px;
     margin:20px;
-    border: 1px solid rgb(234, 230, 230);
+    /* border: 1px solid rgb(234, 230, 230); */
     padding: 30px;
-    /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.19); */
-    /* background-color: #ffff; */
     border-radius: 6px;
 }
 .editCrew{
@@ -12,6 +10,14 @@
     width: 100%;
 }
 .editCrew input{
+    width: 240px;
+    font-size: 14px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    margin-right: 148px;
+    outline: none;
+}
+.editCrew select{
     width: 240px;
     font-size: 14px;
     padding-left: 5px;
@@ -56,7 +62,7 @@
     outline: none;
 }
 .editAdd{
-    width: 320px;   
+    width: 315px;   
 }
 .editCrewAddress input{
     margin-bottom: 8px;
@@ -68,6 +74,10 @@
 .editUser_input small{
     color: red;
 }
-
-
-
+.addcrewTitle h5{
+  
+    margin-top: 30px;
+    color: #7b0381;
+    font-weight: 600;
+    padding-left: 40px;
+}

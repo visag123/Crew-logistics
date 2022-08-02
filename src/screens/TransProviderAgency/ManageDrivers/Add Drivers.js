@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import Default from "../../Default.json";
 import "./addDrivers.css"
 import Input from '../../../components/input/Input';
 import UserDataService from "../../../firebase/userservice";
@@ -35,9 +35,12 @@ const AddDrivers = () => {
     const { usersId, setUsersid,userInfo } = useUserAuth();
     const [genderStatus, upadateGenderStatus] = useState();
 
+    let value = Default.Form;
+    let {FirstName,LastName,Dop,UserId,Gender,Status,Primarynumber,SecondaryNumber,ServiceArea,shifttimings,Email,
+      Addline1,Addline2,City,State,Pincode,Address}=value
 
     const { firstname, lastname,
-        dob, userId, gender, status, Shifttimings, PrimaryNumber, emailadress,
+        dob, userId, gender, status, Shifttimings, PrimaryNumber, emailadress,serviceArea,
         secondaryNumber, addline1, addline2, city, state, pincode, assignedCab, cab } = cabDrivers
       
 
@@ -71,6 +74,9 @@ const AddDrivers = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         cabDrivers.serviceArea = userInfo.location;
+  const addDriver = { firstname, lastname,
+          dob, userId, gender, status, Shifttimings, PrimaryNumber, emailadress,
+          serviceArea, secondaryNumber, addline1, addline2, city, state, pincode, assignedCab :"N/A"}
         try {
             if (usersId !== undefined && usersId !== "") {
                 await UserDataService.updateDriver(usersId, cabDrivers);
@@ -78,7 +84,7 @@ const AddDrivers = () => {
                 navigate("/transportprovider/ManageDrivers");
             }
             else {
-                await UserDataService.addDriver(cabDrivers)
+                await UserDataService.addDriver(addDriver)
                 navigate('/transportprovider/ManageDrivers')
             }
         } catch (error) {
@@ -101,9 +107,9 @@ const AddDrivers = () => {
             <div className="rowitem">
               <div className="colitem">
                 <Input
-                  type="text"
-                  name="firstname"
-                  label="First Name"
+                  type={FirstName.type}
+                  name={FirstName.name}
+                  label={FirstName.label}
                   className="form-main"
                   value={firstname}
                   onChange={handlechange}
@@ -111,9 +117,9 @@ const AddDrivers = () => {
               </div>
               <div className="colitem">
                 <Input
-                  type="text"
-                  name="lastname"
-                  label="Last Name"
+                    type={LastName.type}
+                    name={LastName.name}
+                    label={LastName.label}
                   className="form-main"
                   value={lastname}
                   onChange={handlechange}
@@ -123,9 +129,9 @@ const AddDrivers = () => {
             <div className="rowitem">
               <div className="colitem">
                 <Input
-                  type="date"
-                  name="dob"
-                  label="Date Of Birth"
+                  type={Dop.type}
+                  name={Dop.name}
+                  label={Dop.label}
                   className="form-main "
                   value={dob}
                   onChange={handlechange}
@@ -133,9 +139,9 @@ const AddDrivers = () => {
               </div>
               <div className="colitem">
                 <Input
-                  type="text"
-                  name="userId"
-                  label="User ID"
+                  type={UserId.type}
+                  name={UserId.name}
+                  label={UserId.label}
                   className="form-main"
                   value={userId}
                   onChange={handlechange}
@@ -163,9 +169,9 @@ const AddDrivers = () => {
               
               <div className="colitem">
                 <Input
-                  type="text"
-                  name="status"
-                  label="Status"
+                  type={Status.type}
+                  name={Status.name}
+                  label={Status.label}
                   className="form-main"
                   value={status}
                   onChange={handlechange}
@@ -175,9 +181,9 @@ const AddDrivers = () => {
             <div className="rowitem">
               <div className="colitem">
                 <Input
-                  type="text"
-                  name="PrimaryNumber"
-                  label="Primary Number"
+                  type={Primarynumber.type}
+                  name={Primarynumber.name}
+                  label={Primarynumber.label}
                   className="form-main"
                   value={PrimaryNumber}
                   onChange={handlechange}
@@ -185,21 +191,23 @@ const AddDrivers = () => {
               </div>
               <div className="colitem">
                 <Input
-                  type="text"
-                  name="serviceArea"
-                  label="Service Area"
+                  
+                  type={ServiceArea.type}
+                  name={ServiceArea.name}
+                  label={ServiceArea.label}
                   className="form-main"
                   disable="true"
                   value={userInfo.location}
+        
                 />
               </div>
             </div>
             <div className="rowitem">
               <div className="colitem">
                 <Input
-                  type="text"
-                  name="secondaryNumber"
-                  label="SecondaryNumber"
+                  type={SecondaryNumber.type}
+                 name={SecondaryNumber.name}
+                 label={SecondaryNumber.label}
                   className="form-main"
                   value={secondaryNumber}
                   onChange={handlechange}
@@ -207,9 +215,9 @@ const AddDrivers = () => {
               </div>
               <div className="colitem">
                 <Input
-                  type="text"
-                  name="Shifttimings"
-                  label="Shift Timings"
+                  type={shifttimings.type}
+                  name={shifttimings.name}
+                  label={shifttimings.label}
                   className="form-main"
                   value={Shifttimings}
                   onChange={handlechange}
@@ -219,56 +227,56 @@ const AddDrivers = () => {
             <div className="rowitem ">
               <div className="colitem">
                 <Input
-                  type="text"
-                  name="emailadress"
-                  label="Email Adress"
+                 type={Email.type}
+                  name={Email.name}
+                  label={Email.label}
                   value={emailadress}
                   onChange={handlechange}
                   className="form-main"
                 />
               </div>
               <div className="colitem edittransAddress">
-                <label htmlFor="address">Address</label>
+                <label htmlFor="address">{Address.label}</label>
                 <Input
-                  type="text"
+                  type={Addline1.type}
+                  name={Addline1.name}
                   className="form-main"
-                  placeholder="Address Line 1"
-                  name="addline1"
+                  placeholder={Addline1.label}
                   value={addline1}
                   onChange={handlechange}
                 />
                 <Input
-                  type="text"
+                  type={Addline2.type}
                   className="form-main"
-                  placeholder="Address Line 2"
-                  name="addline2"
+                  placeholder={Addline2.label}
+                  name={Addline2.name}
                   value={addline2}
                   onChange={handlechange}
                 />
                 <div className="adress-content  ">
                   <div>
                   <Input
-                    type="text"
-                    placeholder="City"
-                    name="city"
+                    type={City.type}
+                    name={City.name}
+                    placeholder={City.label}
                     value={city}
                     className="form-control"
                     onChange={handlechange}
                   />
                   </div>
                   <Input
-                    type="text"
-                    placeholder="State"
-                    name="state"
+                    type={State.type}
+                    placeholder={State.label}
+                    name={State.name}
                     value={state}
                     className="form-control"
                     onChange={handlechange}
                   />
                   
                   <Input
-                    type="number"
-                    placeholder="Pin code"
-                    name="pincode"
+                    type={Pincode.type}
+                    name={Pincode.name}
+                    placeholder={Pincode.label}
                     value={pincode}
                     className="form-control "
                     onChange={handlechange}

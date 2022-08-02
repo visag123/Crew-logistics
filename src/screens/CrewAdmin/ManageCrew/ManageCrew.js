@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "./ManageCrew.css"
+import Default from "../../Default.json";
 import UserDataService from "../../../firebase/userservice";
 import { useUserAuth } from "../../../context/UserAuthcontext";
 
@@ -18,17 +19,19 @@ const ManageCrew = () => {
       const data = await UserDataService.getFlightRost();
       setTravel(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-
+    let value = Default.Table;
+    let {FlightRoute,FlightDateTime,CrewMembers,FlightNo}=value;
   return (
     <>
+     <div className="addcrewTitle"><h5>Assign Crew Member to Listed Flights</h5></div>
      <div className="sys-table">
         <table>
           <thead>
             <tr>
-              <th>Flight No</th>
-              <th>Crew Members</th>
-              <th>Flight Route</th>
-              <th >Flight Date & Time</th>
+              <th>{FlightNo}</th>
+              <th>{CrewMembers}</th>
+              <th>{FlightRoute}</th>
+              <th>{FlightDateTime}</th>
             </tr>
           </thead>
           <tbody>

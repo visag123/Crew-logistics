@@ -25,7 +25,7 @@
 }
 .editpage_Title h5{
     padding-top: 15px;
-    color: #004387;
+    color: #800087;
     font-weight: 600;
 }
 .editpage_Addprovider{
@@ -144,7 +144,7 @@ text-decoration: none;
 .editUser_button{
     display: flex;
     gap: 150px;
-    margin-top: 55px;
+    margin-top: 20px;
 }
 .editUser_button button{
     width: 200px;

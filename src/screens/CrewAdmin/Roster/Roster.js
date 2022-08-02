@@ -106,6 +106,7 @@ const TableTitle=(data)=>{
 }
   return (
     <>   
+    <div className="addcrewTitle"><h5>Flight Schedule</h5></div>
       <div className="sys-table">
         <div className="rosterHeader">
           <div className="rosterSearch">

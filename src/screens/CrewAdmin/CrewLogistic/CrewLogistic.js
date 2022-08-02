@@ -1,5 +1,9 @@
 import React,{ useState, useEffect,useRef}  from 'react';
 import UserDataService from "../../../firebase/userservice";
+import { Link, useNavigate } from "react-router-dom";
+import { useUserAuth } from "../../../Context/UserAuthcontext";
+import Default from "../../Default.json";
+
 
 const CrewLogistic = () => {
     const [flightData,setFlightData] = useState([]);
@@ -13,6 +17,11 @@ const CrewLogistic = () => {
     const [flag,setFlag] =useState(false)
     const [to,setTo] =useState('')
     const searchinput = useRef();
+    const { getUserId } = useUserAuth();
+    const navigate = useNavigate();
+
+    let value = Default.Table;
+    let {FlightRoute,RequestTransport,EmployeeName,Dates,ContactNO,UserID}=value;
 
     useEffect(() => {
         getFlightroster();
@@ -45,10 +54,12 @@ const CrewLogistic = () => {
         setDate(date)
         setFlag(false)
       }
+      const requestHandler =()=>{
+        navigate('/admin/crew/arrangetrans')
+      }
   return (
     <>
-      
-
+    <div className="addcrewTitle"><h5>Logistics Arrangement</h5></div>
     <div className="sys-table">
     <div className="rosterHeader">
           <div className="rosterSearch">
@@ -98,12 +109,12 @@ const CrewLogistic = () => {
         <table>
           <thead>
             <tr>
-              <th>User ID</th>
-              <th>Employee Name</th>
-              <th >Flight Route</th>
-              <th>Contact NO</th>             
-              <th>Date</th>
-              <th>Request Transport</th>
+              <th>{UserID}</th>
+              <th>{EmployeeName}</th>
+              <th >{FlightRoute}</th>
+              <th>{ContactNO}</th>             
+              <th>{Dates}</th>
+              <th>{RequestTransport}</th>
             </tr>
           </thead>
           <tbody>
@@ -133,7 +144,7 @@ const CrewLogistic = () => {
                   <td> {doc.Origin} - {doc.Destination}</td>
                   <td>{doc.ContactNo}</td>
                   <td className="viewRost">{doc.date}</td>
-                  <td className="viewRost"><button onClick={Request}>Make Request</button></td>
+                  <td className="viewRost" onClick={() => getUserId(doc.id)}><button onClick={requestHandler}>Make Request</button></td>
                 </tr>
               );
             })}

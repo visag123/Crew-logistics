@@ -4,6 +4,7 @@ import UserDataService from "../../../firebase/userservice";
 import { useState, useEffect } from "react";
 import { useUserAuth } from "../../../context/UserAuthcontext";
 import { Link } from "react-router-dom";
+import Default from "../../Default.json";
 
 const Userlist = () => {
   const [users, setUsers] = useState([]);
@@ -13,7 +14,10 @@ const Userlist = () => {
   const searchinput = useRef();
   const [message, setMessage] = useState({ error: false, msg: "" });
   const { signUp, getUserId } = useUserAuth();
-// let ssss=[];
+
+  let value = Default.Table;
+  let {Save,Username,LastEdited,Role,Status,Email,UserID}=value;
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -120,13 +124,13 @@ const Userlist = () => {
         <table>
           <thead>
             <tr>
-              <th>User ID</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Role</th>
-              <th>Last Edited</th>
-              <th>Save/Delete</th>
+              <th>{UserID}</th>
+              <th>{Username}</th>
+              <th>{Email}</th>
+              <th>{Status}</th>
+              <th>{Role}</th>
+              <th>{LastEdited}</th>
+              <th>{Save}</th>
             </tr>
           </thead>
           <tbody>

@@ -36,8 +36,28 @@ form.add-driver-form {
 }
 .adress-content {
     display: flex;
+
 }
 .btn-actions.btn-group.mt-4.rowitem {
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
+.form-main{
+    display: block;
+    width: 500px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #171d24;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #a7bcd1;
+    appearance: none;
+    border-radius: .25rem;
+    
+}
+
+
+
+

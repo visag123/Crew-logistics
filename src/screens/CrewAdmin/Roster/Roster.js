@@ -2,7 +2,7 @@ import React, { useState, useEffect,useRef } from "react";
 import UserDataService from "../../../firebase/userservice";
 import Default from "../../Default.json";
 import { Link } from 'react-router-dom';
-import { useUserAuth } from "../../../Context/UserAuthcontext";
+import { useUserAuth } from "../../../context/UserAuthcontext";
 // import * as XLSX from 'xlsx'
 import "./Roster.css";
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Sidebar.css";
 import { Link, useNavigate, } from "react-router-dom";
-import { useUserAuth } from '../../Context/UserAuthcontext';
+import { useUserAuth } from '../../context/UserAuthcontext';
 
 const Sidebar = () => {
     const {isAuth,setIsAuth,crew,setCrew,trans,setTrans} =useUserAuth();

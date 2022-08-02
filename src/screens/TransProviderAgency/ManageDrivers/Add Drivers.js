@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import "./addDrivers.css"
-import Input from '../../../components/Input/Input';
+import Input from '../../../components/input/Input';
 import UserDataService from "../../../firebase/userservice";
-import { useUserAuth } from '../../../Context/UserAuthcontext';
+import { useUserAuth } from '../../../context/UserAuthcontext';
 import { connectFirestoreEmulator } from 'firebase/firestore';
-import Button from '../../../components/Button/Button';
+import Button from '../../../components/button/Button';
 
 
 const AddDrivers = () => {
@@ -32,11 +32,14 @@ const AddDrivers = () => {
     })
     const [cabs, updateCabs] = useState([]);
     const navigate = useNavigate();
-    const { usersId, setUsersid } = useUserAuth();
+    const { usersId, setUsersid,userInfo } = useUserAuth();
+    const [genderStatus, upadateGenderStatus] = useState();
+
 
     const { firstname, lastname,
         dob, userId, gender, status, Shifttimings, PrimaryNumber, emailadress,
-        serviceArea, secondaryNumber, addline1, addline2, city, state, pincode, assignedCab, cab } = cabDrivers
+        secondaryNumber, addline1, addline2, city, state, pincode, assignedCab, cab } = cabDrivers
+      
 
     const handlechange = (e) => {
         let { name, value } = e.target;
@@ -53,7 +56,6 @@ const AddDrivers = () => {
     const getcabdetails = async () => {
         const data = await UserDataService.getcabdetails();
         updateCabs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        //console.log(cabs);
     }
     useEffect(() => {
         if (usersId !== undefined && usersId !== "") {
@@ -68,6 +70,7 @@ const AddDrivers = () => {
     // /// ADD/ Drivers Fn ////
     const submitHandler = async (e) => {
         e.preventDefault();
+        cabDrivers.serviceArea = userInfo.location;
         try {
             if (usersId !== undefined && usersId !== "") {
                 await UserDataService.updateDriver(usersId, cabDrivers);
@@ -101,7 +104,7 @@ const AddDrivers = () => {
                   type="text"
                   name="firstname"
                   label="First Name"
-                  className="form-control"
+                  className="form-main"
                   value={firstname}
                   onChange={handlechange}
                 />
@@ -111,7 +114,7 @@ const AddDrivers = () => {
                   type="text"
                   name="lastname"
                   label="Last Name"
-                  className="form-control"
+                  className="form-main"
                   value={lastname}
                   onChange={handlechange}
                 />
@@ -123,7 +126,7 @@ const AddDrivers = () => {
                   type="date"
                   name="dob"
                   label="Date Of Birth"
-                  className="form-control "
+                  className="form-main "
                   value={dob}
                   onChange={handlechange}
                 />
@@ -133,7 +136,7 @@ const AddDrivers = () => {
                   type="text"
                   name="userId"
                   label="User ID"
-                  className="form-control"
+                  className="form-main"
                   value={userId}
                   onChange={handlechange}
                 />
@@ -141,21 +144,29 @@ const AddDrivers = () => {
             </div>
             <div className="rowitem">
               <div className="colitem">
-                <Input
+                {/* <Input
                   type="text"
                   name="gender"
                   label="Gender"
-                  className="form-control"
+                  className="form-main"
                   value={gender}
                   onChange={handlechange}
-                />
+                /> */}
+                <div>
+               <label htmlFor="gender" >Gender</label>
+                <select value={genderStatus} id="gender" onChange={handlechange} className="form-main">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+               </div>
               </div>
+              
               <div className="colitem">
                 <Input
                   type="text"
                   name="status"
                   label="Status"
-                  className="form-control"
+                  className="form-main"
                   value={status}
                   onChange={handlechange}
                 />
@@ -167,7 +178,7 @@ const AddDrivers = () => {
                   type="text"
                   name="PrimaryNumber"
                   label="Primary Number"
-                  className="form-control"
+                  className="form-main"
                   value={PrimaryNumber}
                   onChange={handlechange}
                 />
@@ -177,9 +188,9 @@ const AddDrivers = () => {
                   type="text"
                   name="serviceArea"
                   label="Service Area"
-                  className="form-control"
-                  value={serviceArea}
-                  onChange={handlechange}
+                  className="form-main"
+                  disable="true"
+                  value={userInfo.location}
                 />
               </div>
             </div>
@@ -189,7 +200,7 @@ const AddDrivers = () => {
                   type="text"
                   name="secondaryNumber"
                   label="SecondaryNumber"
-                  className="form-control"
+                  className="form-main"
                   value={secondaryNumber}
                   onChange={handlechange}
                 />
@@ -199,7 +210,7 @@ const AddDrivers = () => {
                   type="text"
                   name="Shifttimings"
                   label="Shift Timings"
-                  className="form-control"
+                  className="form-main"
                   value={Shifttimings}
                   onChange={handlechange}
                 />
@@ -213,14 +224,14 @@ const AddDrivers = () => {
                   label="Email Adress"
                   value={emailadress}
                   onChange={handlechange}
-                  className="form-control"
+                  className="form-main"
                 />
               </div>
               <div className="colitem edittransAddress">
                 <label htmlFor="address">Address</label>
                 <Input
                   type="text"
-                  className="edittrans w"
+                  className="form-main"
                   placeholder="Address Line 1"
                   name="addline1"
                   value={addline1}
@@ -228,13 +239,14 @@ const AddDrivers = () => {
                 />
                 <Input
                   type="text"
-                  className="edittrans w"
+                  className="form-main"
                   placeholder="Address Line 2"
                   name="addline2"
                   value={addline2}
                   onChange={handlechange}
                 />
-                <div className="adress-content ">
+                <div className="adress-content  ">
+                  <div>
                   <Input
                     type="text"
                     placeholder="City"
@@ -243,6 +255,7 @@ const AddDrivers = () => {
                     className="form-control"
                     onChange={handlechange}
                   />
+                  </div>
                   <Input
                     type="text"
                     placeholder="State"
@@ -251,12 +264,13 @@ const AddDrivers = () => {
                     className="form-control"
                     onChange={handlechange}
                   />
+                  
                   <Input
                     type="number"
                     placeholder="Pin code"
                     name="pincode"
                     value={pincode}
-                    className="form-control"
+                    className="form-control "
                     onChange={handlechange}
                   />
                 </div>

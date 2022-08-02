@@ -2,11 +2,11 @@ import React, {  useState } from "react";
 import  "./Login.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useUserAuth } from "../../Context/UserAuthcontext";
+import { useUserAuth } from "../../context/UserAuthcontext";
 import UserDataService from"../../firebase/userservice";
 import logo from "../../assets/landscape-view.jpg";
-import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
+import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -34,26 +34,27 @@ const Login = () => {
     const data = await UserDataService.getAllUsers();
      data.docs.forEach((doc) => {
        const newdata = doc.data();
+
        // console.log(newdata);
        if (newdata.email === username) {
          if (newdata.password === password) {
            if (newdata.status === "Active") {
              if (newdata.role === "Crew Admin") {
-              setUserInfo({initial:true , nameId:newdata.username})
+              setUserInfo({initial:true , nameId:newdata.username, location:newdata.location})
               setCrew(true)
                setIsAuth(!isAuth)
                navigate("/admin/crew");
              } else if (newdata.role === "Transport Admin") {
-              setUserInfo({initial:true , nameId:newdata.username})
+              setUserInfo({initial:true , nameId:newdata.username, location:newdata.location})
               setTrans(true)
               setIsAuth(!isAuth)
                navigate("/admin/trans");
              }else if (newdata.role === "Crew Member") {
-              setUserInfo({initial:true , nameId:newdata.username,userId:newdata.userId})
+              setUserInfo({initial:true , nameId:newdata.username,userId:newdata.userId, location:newdata.location})
                navigate("/crewmember");
              }
              else if (newdata.role === "Transport Provider") {
-              setUserInfo({initial:true , nameId:newdata.username})
+              setUserInfo({initial:true , nameId:newdata.username, location:newdata.location})
                navigate("/transportprovider");
              }
              

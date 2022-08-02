@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import {BsCircle} from 'react-icons/bs';
 import {GiCommercialAirplane} from 'react-icons/gi';
-import { useUserAuth } from "../../Context/UserAuthcontext";
+import { useUserAuth } from "../../context/UserAuthcontext";
 import UserDataService from "../../firebase/userservice";
 
 const CrewMemberRoster = () => {

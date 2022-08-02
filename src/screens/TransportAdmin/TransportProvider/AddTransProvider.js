@@ -2,7 +2,7 @@ import React from 'react';
 import { useState,useEffect } from 'react';
 import { useNavigate } from "react-router";
 import UserDataService from "../../../firebase/userservice";
-import Input from '../../../components/Input/Input';
+import Input from '../../../components/input/Input';
 import Default from "../../Default.json";
 
 const AddTransProvider = () => {

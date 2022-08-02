@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Default from "../../Default.json";
 import "./addDrivers.css"
-import Input from '../../../components/Input/Input';
+import Input from '../../../components/input/Input';
 import UserDataService from "../../../firebase/userservice";
-import { useUserAuth } from '../../../Context/UserAuthcontext';
+import { useUserAuth } from '../../../context/UserAuthcontext';
 import { connectFirestoreEmulator } from 'firebase/firestore';
-import Button from '../../../components/Button/Button';
+import Button from '../../../components/button/Button';
 
 
 const AddDrivers = () => {
@@ -32,14 +32,17 @@ const AddDrivers = () => {
     })
     const [cabs, updateCabs] = useState([]);
     const navigate = useNavigate();
-    const { usersId, setUsersid } = useUserAuth();
+    const { usersId, setUsersid,userInfo } = useUserAuth();
+    const [genderStatus, upadateGenderStatus] = useState();
+
     let value = Default.Form;
     let {FirstName,LastName,Dop,UserId,Gender,Status,Primarynumber,SecondaryNumber,ServiceArea,shifttimings,Email,
       Addline1,Addline2,City,State,Pincode,Address}=value
 
     const { firstname, lastname,
-        dob, userId, gender, status, Shifttimings, PrimaryNumber, emailadress,
-        serviceArea, secondaryNumber, addline1, addline2, city, state, pincode, assignedCab, cab } = cabDrivers
+        dob, userId, gender, status, Shifttimings, PrimaryNumber, emailadress,serviceArea,
+        secondaryNumber, addline1, addline2, city, state, pincode, assignedCab, cab } = cabDrivers
+      
 
     const handlechange = (e) => {
         let { name, value } = e.target;
@@ -56,7 +59,6 @@ const AddDrivers = () => {
     const getcabdetails = async () => {
         const data = await UserDataService.getcabdetails();
         updateCabs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        //console.log(cabs);
     }
     useEffect(() => {
         if (usersId !== undefined && usersId !== "") {
@@ -71,6 +73,7 @@ const AddDrivers = () => {
     // /// ADD/ Drivers Fn ////
     const submitHandler = async (e) => {
         e.preventDefault();
+        cabDrivers.serviceArea = userInfo.location;
   const addDriver = { firstname, lastname,
           dob, userId, gender, status, Shifttimings, PrimaryNumber, emailadress,
           serviceArea, secondaryNumber, addline1, addline2, city, state, pincode, assignedCab :"N/A"}
@@ -107,7 +110,7 @@ const AddDrivers = () => {
                   type={FirstName.type}
                   name={FirstName.name}
                   label={FirstName.label}
-                  className="form-control"
+                  className="form-main"
                   value={firstname}
                   onChange={handlechange}
                 />
@@ -117,7 +120,7 @@ const AddDrivers = () => {
                     type={LastName.type}
                     name={LastName.name}
                     label={LastName.label}
-                  className="form-control"
+                  className="form-main"
                   value={lastname}
                   onChange={handlechange}
                 />
@@ -129,7 +132,7 @@ const AddDrivers = () => {
                   type={Dop.type}
                   name={Dop.name}
                   label={Dop.label}
-                  className="form-control "
+                  className="form-main "
                   value={dob}
                   onChange={handlechange}
                 />
@@ -139,7 +142,7 @@ const AddDrivers = () => {
                   type={UserId.type}
                   name={UserId.name}
                   label={UserId.label}
-                  className="form-control"
+                  className="form-main"
                   value={userId}
                   onChange={handlechange}
                 />
@@ -147,21 +150,29 @@ const AddDrivers = () => {
             </div>
             <div className="rowitem">
               <div className="colitem">
-                <Input
-                  type={Gender.type}
-                  name={Gender.name}
-                  label={Gender.label}
-                  className="form-control"
+                {/* <Input
+                  type="text"
+                  name="gender"
+                  label="Gender"
+                  className="form-main"
                   value={gender}
                   onChange={handlechange}
-                />
+                /> */}
+                <div>
+               <label htmlFor="gender" >Gender</label>
+                <select value={genderStatus} id="gender" onChange={handlechange} className="form-main">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+               </div>
               </div>
+              
               <div className="colitem">
                 <Input
                   type={Status.type}
                   name={Status.name}
                   label={Status.label}
-                  className="form-control"
+                  className="form-main"
                   value={status}
                   onChange={handlechange}
                 />
@@ -173,19 +184,21 @@ const AddDrivers = () => {
                   type={Primarynumber.type}
                   name={Primarynumber.name}
                   label={Primarynumber.label}
-                  className="form-control"
+                  className="form-main"
                   value={PrimaryNumber}
                   onChange={handlechange}
                 />
               </div>
               <div className="colitem">
                 <Input
+                  
                   type={ServiceArea.type}
                   name={ServiceArea.name}
                   label={ServiceArea.label}
-                  className="form-control"
-                  value={serviceArea}
-                  onChange={handlechange}
+                  className="form-main"
+                  disable="true"
+                  value={userInfo.location}
+        
                 />
               </div>
             </div>
@@ -195,7 +208,7 @@ const AddDrivers = () => {
                   type={SecondaryNumber.type}
                  name={SecondaryNumber.name}
                  label={SecondaryNumber.label}
-                  className="form-control"
+                  className="form-main"
                   value={secondaryNumber}
                   onChange={handlechange}
                 />
@@ -205,7 +218,7 @@ const AddDrivers = () => {
                   type={shifttimings.type}
                   name={shifttimings.name}
                   label={shifttimings.label}
-                  className="form-control"
+                  className="form-main"
                   value={Shifttimings}
                   onChange={handlechange}
                 />
@@ -219,7 +232,7 @@ const AddDrivers = () => {
                   label={Email.label}
                   value={emailadress}
                   onChange={handlechange}
-                  className="form-control"
+                  className="form-main"
                 />
               </div>
               <div className="colitem edittransAddress">
@@ -227,20 +240,21 @@ const AddDrivers = () => {
                 <Input
                   type={Addline1.type}
                   name={Addline1.name}
-                  className="edittrans w"
+                  className="form-main"
                   placeholder={Addline1.label}
                   value={addline1}
                   onChange={handlechange}
                 />
                 <Input
                   type={Addline2.type}
-                  className="edittrans w"
+                  className="form-main"
                   placeholder={Addline2.label}
                   name={Addline2.name}
                   value={addline2}
                   onChange={handlechange}
                 />
-                <div className="adress-content ">
+                <div className="adress-content  ">
+                  <div>
                   <Input
                     type={City.type}
                     name={City.name}
@@ -249,6 +263,7 @@ const AddDrivers = () => {
                     className="form-control"
                     onChange={handlechange}
                   />
+                  </div>
                   <Input
                     type={State.type}
                     placeholder={State.label}
@@ -257,12 +272,13 @@ const AddDrivers = () => {
                     className="form-control"
                     onChange={handlechange}
                   />
+                  
                   <Input
                     type={Pincode.type}
                     name={Pincode.name}
                     placeholder={Pincode.label}
                     value={pincode}
-                    className="form-control"
+                    className="form-control "
                     onChange={handlechange}
                   />
                 </div>

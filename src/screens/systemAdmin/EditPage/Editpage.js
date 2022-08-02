@@ -2,9 +2,9 @@ import React from 'react';
 import { useState,useEffect } from 'react';
 import { useNavigate } from "react-router";
 import UserDataService from "../../../firebase/userservice";
-import Input from '../../../components/Input/Input';
+import Input from '../../../components/input/Input';
 import "./Edit.css"
-import { useUserAuth } from '../../../Context/UserAuthcontext';
+import { useUserAuth } from '../../../context/UserAuthcontext';
 import Default from "../../Default.json";
 
 const Editpage = () => {

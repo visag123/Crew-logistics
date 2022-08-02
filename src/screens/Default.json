@@ -156,10 +156,30 @@
                 "name":"noOfVehicles",
                 "label":"Active Period"
             },
-            "ContactNO":{
+            "ContactNo":{
                 "type":"text",
                 "name":"contactNo",
-                "label":"Contact NO"
+                "label":"Contact No"
+            },
+            "EmployeeID":{
+                "type":"text",
+                "name":"employeeID",
+                "label":"Employee ID"
+            },
+            "EmployeeName":{
+                "type":"text",
+                "name":"employeeName",
+                "label":"Employee Name"
+            },
+            "Pickup":{
+                "type":"time",
+                "name":"pickup",
+                "label":"Pickup From Airport"
+            },
+            "DropLocation":{
+                "type":"text",
+                "name":"dropLocation",
+                "label":"Drop Location"
             }           
         }, 
         "Table":{

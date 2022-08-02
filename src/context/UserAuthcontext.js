@@ -15,11 +15,12 @@ export function UserAuthContextProvider({ children }) {
   const [trans,setTrans] = useState(false)
   const [isAuth,setIsAuth] =useState(false)
   const [usersId,setUsersid]=useState('');
+  
   // const [crewId,setCrewId]=useState('');
 
   const getUserId=(id)=>{
         setUsersid(id);
-       // console.log(id);
+      //  console.log(id);
   }
 
   function logIn(email, password) {
